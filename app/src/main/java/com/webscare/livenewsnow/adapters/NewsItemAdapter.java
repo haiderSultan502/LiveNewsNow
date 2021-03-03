@@ -17,14 +17,28 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
 
     View view;
     Context context;
+    String checkView;
 
-    public NewsItemAdapter(Context context){
+    public NewsItemAdapter(Context context,String checkView){
         this.context  = context;
+        this.checkView = checkView;
     }
     @NonNull
     @Override
     public NewsItemAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view = LayoutInflater.from(context).inflate(R.layout.news_item_home_horizontally,parent,false);
+
+        if (checkView.equals("rvHorizontally"))
+        {
+            view = LayoutInflater.from(context).inflate(R.layout.news_item_home_horizontally,parent,false);
+        }
+        else if (checkView.equals("rvVertically"))
+        {
+            view = LayoutInflater.from(context).inflate(R.layout.news_item_home_vertically,parent,false);
+        }
+        else if (checkView.equals("rvTopHorizontally"))
+        {
+            view = LayoutInflater.from(context).inflate(R.layout.news_item_horizontally,parent,false);
+        }
         return new NewsItemAdapter.ItemViewHolder(view);
     }
 

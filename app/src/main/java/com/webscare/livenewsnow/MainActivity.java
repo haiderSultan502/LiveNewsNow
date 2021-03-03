@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
+import com.webscare.livenewsnow.fragments.AmericanFragment;
 import com.webscare.livenewsnow.fragments.HomeFragment;
 import com.webscare.livenewsnow.adapters.ViewPagerAdapter;
 
@@ -35,11 +36,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addTabs(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
         adapter.addFrag(new HomeFragment(), "Home");
-        adapter.addFrag(new HomeFragment(), "American");
+        adapter.addFrag(new AmericanFragment(), "American");
         adapter.addFrag(new HomeFragment(), "Updates");
         adapter.addFrag(new HomeFragment(), "Business");
+//        adapter.addFrag(new HomeFragment(), "Daily");
+//        adapter.addFrag(new HomeFragment(), "Magazine");
+//        adapter.addFrag(new HomeFragment(), "Sports");
+//        adapter.addFrag(new HomeFragment(), "Finance");
+//        adapter.addFrag(new HomeFragment(), "Politics");
+
         viewPager.setAdapter(adapter);
     }
 }

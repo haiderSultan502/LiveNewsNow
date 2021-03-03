@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.webscare.livenewsnow.R;
 import com.webscare.livenewsnow.adapters.NewsItemAdapter;
 
-public class HomeFragment extends Fragment {
+public class AmericanFragment extends Fragment {
 
     View view;
-    RecyclerView rvTopNewsHorizontally,rvNewsVertically,rvNewsHorizontally,rvFinanceHomeNewsVertically;
+    RecyclerView rvTopNewsHorizontally,rvNewsVertically,rvNewsHorizontally;
     LinearLayoutManager linearLayoutManager;
-    public HomeFragment(){
+    public AmericanFragment(){
 
     }
 
@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.fragment_american, container, false);
 
         initializeView();
         showDataInView();
@@ -42,38 +42,31 @@ public class HomeFragment extends Fragment {
 
     private void showDataInView() {
 
-        NewsItemAdapter newsItemAdapterHr = new NewsItemAdapter(getActivity(),"rvHorizontally");
-        rvTopNewsHorizontally.setAdapter(newsItemAdapterHr);
+        NewsItemAdapter newsItemAdapterTopHr = new NewsItemAdapter(getActivity(),"rvTopHorizontally");
+        rvTopNewsHorizontally.setAdapter(newsItemAdapterTopHr);
         NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically");
         rvNewsVertically.setAdapter(newsItemAdapterVr);
         NewsItemAdapter newsItemAdapterHrFinance = new NewsItemAdapter(getActivity(),"rvHorizontally");
         rvNewsHorizontally.setAdapter(newsItemAdapterHrFinance);
-        NewsItemAdapter newsItemAdapterVrFinance = new NewsItemAdapter(getActivity(),"rvVertically");
-        rvFinanceHomeNewsVertically.setAdapter(newsItemAdapterVrFinance);
+
     }
 
     private void initializeView() {
 
-        rvTopNewsHorizontally=view.findViewById(R.id.rv_home_news_horizontally);
-        rvNewsVertically=view.findViewById(R.id.rv_home_news_vertically);
-        rvNewsHorizontally=view.findViewById(R.id.rv_finance_home_news_horizontally);
-        rvFinanceHomeNewsVertically=view.findViewById(R.id.rv_finance_home_news_vertically);
+        rvTopNewsHorizontally=view.findViewById(R.id.rv_top_news_item_horizontally);
+        rvNewsVertically=view.findViewById(R.id.rv_news_item_vertically);
+        rvNewsHorizontally=view.findViewById(R.id.rv_news_item_horizontally);
+
+        setOrientationTopHorizontallRv();
         setOrientationHorizontallRv();
         setOrientationVerticallyRv();
-        setOrientationTopHorizontallRv();
-        setOrientationFinanceVerticallyRv();
 
     }
 
     private void setOrientationTopHorizontallRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvNewsHorizontally.setLayoutManager(linearLayoutManager);
-    }
-    private void setOrientationFinanceVerticallyRv() {
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvFinanceHomeNewsVertically.setLayoutManager(linearLayoutManager);
+        rvTopNewsHorizontally.setLayoutManager(linearLayoutManager);
     }
 
     private void setOrientationVerticallyRv() {
@@ -85,6 +78,6 @@ public class HomeFragment extends Fragment {
     private void setOrientationHorizontallRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvTopNewsHorizontally.setLayoutManager(linearLayoutManager);
+        rvNewsHorizontally.setLayoutManager(linearLayoutManager);
     }
 }
