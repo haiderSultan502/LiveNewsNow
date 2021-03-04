@@ -73,7 +73,7 @@
         android:paddingTop="@dimen/_10sdp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home_news_horizontally"
+            android:id="@+id/rv_news_home_horizontally"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
@@ -85,7 +85,7 @@
         android:paddingLeft="@dimen/_10sdp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home_news_vertically"
+            android:id="@+id/rv_news_home_vertically"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
@@ -117,7 +117,7 @@
                 android:paddingTop="@dimen/_10sdp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_finance_home_news_horizontally"
+                    android:id="@+id/rv_news_finance_horizontally"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
@@ -129,7 +129,7 @@
                 android:paddingLeft="@dimen/_10sdp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_finance_home_news_vertically"
+                    android:id="@+id/rv_news_finance_vertically"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 

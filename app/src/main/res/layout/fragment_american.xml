@@ -18,10 +18,12 @@
         android:paddingTop="@dimen/_10sdp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_top_news_item_horizontally"
+            android:id="@+id/rv_top_news_american_horizontally"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -30,10 +32,11 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_news_item_vertically"
+            android:id="@+id/rv_news_american_vertically"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
+
     </LinearLayout>
 
     <LinearLayout
@@ -44,7 +47,7 @@
         android:paddingBottom="@dimen/_10sdp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_news_item_horizontally"
+            android:id="@+id/rv_news_american_horizontally"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>

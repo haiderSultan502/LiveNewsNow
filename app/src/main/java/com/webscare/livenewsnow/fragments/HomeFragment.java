@@ -17,7 +17,7 @@ import com.webscare.livenewsnow.adapters.NewsItemAdapter;
 public class HomeFragment extends Fragment {
 
     View view;
-    RecyclerView rvTopNewsHorizontally,rvNewsVertically,rvNewsHorizontally,rvFinanceHomeNewsVertically;
+    RecyclerView rvNewsHomeHorizontally,rvNewsHomeVertically,rvNewsFinanceHorizontally,rvNewsFinanceVertically;
     LinearLayoutManager linearLayoutManager;
     public HomeFragment(){
 
@@ -43,48 +43,48 @@ public class HomeFragment extends Fragment {
     private void showDataInView() {
 
         NewsItemAdapter newsItemAdapterHr = new NewsItemAdapter(getActivity(),"rvHorizontally");
-        rvTopNewsHorizontally.setAdapter(newsItemAdapterHr);
+        rvNewsHomeHorizontally.setAdapter(newsItemAdapterHr);
         NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically");
-        rvNewsVertically.setAdapter(newsItemAdapterVr);
+        rvNewsHomeVertically.setAdapter(newsItemAdapterVr);
         NewsItemAdapter newsItemAdapterHrFinance = new NewsItemAdapter(getActivity(),"rvHorizontally");
-        rvNewsHorizontally.setAdapter(newsItemAdapterHrFinance);
+        rvNewsFinanceHorizontally.setAdapter(newsItemAdapterHrFinance);
         NewsItemAdapter newsItemAdapterVrFinance = new NewsItemAdapter(getActivity(),"rvVertically");
-        rvFinanceHomeNewsVertically.setAdapter(newsItemAdapterVrFinance);
+        rvNewsFinanceVertically.setAdapter(newsItemAdapterVrFinance);
     }
 
     private void initializeView() {
 
-        rvTopNewsHorizontally=view.findViewById(R.id.rv_home_news_horizontally);
-        rvNewsVertically=view.findViewById(R.id.rv_home_news_vertically);
-        rvNewsHorizontally=view.findViewById(R.id.rv_finance_home_news_horizontally);
-        rvFinanceHomeNewsVertically=view.findViewById(R.id.rv_finance_home_news_vertically);
-        setOrientationHorizontallRv();
-        setOrientationVerticallyRv();
-        setOrientationTopHorizontallRv();
+        rvNewsHomeHorizontally=view.findViewById(R.id.rv_news_home_horizontally);
+        rvNewsHomeVertically=view.findViewById(R.id.rv_news_home_vertically);
+        rvNewsFinanceHorizontally=view.findViewById(R.id.rv_news_finance_horizontally);
+        rvNewsFinanceVertically=view.findViewById(R.id.rv_news_finance_vertically);
+        setOrientationNewsHomeHorizontallRv();
+        setOrientationNewsHomeVerticallyRv();
+        setOrientationFinanceHorizontallRv();
         setOrientationFinanceVerticallyRv();
 
     }
 
-    private void setOrientationTopHorizontallRv() {
+    private void setOrientationFinanceHorizontallRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvNewsHorizontally.setLayoutManager(linearLayoutManager);
+        rvNewsFinanceHorizontally.setLayoutManager(linearLayoutManager);
     }
     private void setOrientationFinanceVerticallyRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvFinanceHomeNewsVertically.setLayoutManager(linearLayoutManager);
+        rvNewsFinanceVertically.setLayoutManager(linearLayoutManager);
     }
 
-    private void setOrientationVerticallyRv() {
+    private void setOrientationNewsHomeVerticallyRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvNewsVertically.setLayoutManager(linearLayoutManager);
+        rvNewsHomeVertically.setLayoutManager(linearLayoutManager);
     }
 
-    private void setOrientationHorizontallRv() {
+    private void setOrientationNewsHomeHorizontallRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvTopNewsHorizontally.setLayoutManager(linearLayoutManager);
+        rvNewsHomeHorizontally.setLayoutManager(linearLayoutManager);
     }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_160sdp"
+    android:background="#071f4f">
+    <ImageView
+        android:id="@+id/user_image"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:background="@drawable/user_imge_bg"
+        android:src="@drawable/user_imge_bg">
+    </ImageView>
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alex Powell"
+        android:layout_toRightOf="@id/user_image"
+        android:layout_marginTop="@dimen/_75sdp"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user"
+        android:layout_below="@id/tv_username"
+        android:layout_toRightOf="@+id/user_image"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:textStyle="normal"
+        android:textColor="@color/white"/>
+    <ImageView
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bottom_line"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_below="@+id/user_image"></ImageView>
+
+</RelativeLayout>
