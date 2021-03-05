@@ -1,6 +1,7 @@
 package com.webscare.livenewsnow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -81,12 +82,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (switchDt.isChecked())
                 {
                     switchDt.setChecked(true);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 //                    setTheme(android.R.style.Theme_Black);
 //                    recreate();
                 }
                 else
                 {
                     switchDt.setChecked(false);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
                 break;
         }

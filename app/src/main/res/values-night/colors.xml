@@ -9,10 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent_color">#80ffffff</color>
     <color name="tab_indicator_color">#fafd00</color>
-    <color name="tab_txt_color">#aeb5c0</color>
-    <color name="latest_news_bg">#f5f6f7</color>
-    <color name="post_title_color">#09245b</color>
-    <color name="post_time_and_comment">#c1c0c8</color>
-    <color name="app_bg_color">#ffffff</color>
-    <color name="category_title_color">#09245b</color>
+    <color name="tab_txt_color">#9fa7b3</color>
+    <color name="latest_news_bg">#06122b</color>
+    <color name="post_title_color">#efefef</color>
+    <color name="post_time_and_comment">#575d69</color>
+    <color name="app_bg_color">#06122b</color>
+    <color name="category_title_color">#fafd00</color>
 </resources>

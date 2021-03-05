@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_bg_color"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="Latest News"
             android:textSize="@dimen/_12sdp"
-            android:textColor="@color/tab_selected_txt_color"
+            android:textColor="@color/category_title_color"
             android:textStyle="bold"
             android:layout_marginLeft="@dimen/_15sdp"></TextView>
 
@@ -103,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:text="Finance"
                     android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/tab_selected_txt_color"
+                    android:textColor="@color/category_title_color"
                     android:textStyle="bold"
                     android:layout_marginLeft="@dimen/_15sdp"></TextView>
 

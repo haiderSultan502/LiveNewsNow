@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="Saudi Crown Prince Approved Killing..."
         android:textSize="@dimen/_11sdp"
-        android:textColor="@color/tab_selected_txt_color"
+        android:textColor="@color/post_title_color"
         android:layout_marginTop="@dimen/_11sdp"
         android:textStyle="bold" />
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="45 min ago"
             android:textSize="@dimen/_8sdp"
-            android:textColor="@color/tab_txt_color"
+            android:textColor="@color/post_time_and_comment"
             android:textStyle="bold"
             android:layout_alignParentLeft="true"/>
         <TextView
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text="33 Comments"
             android:textSize="@dimen/_8sdp"
-            android:textColor="@color/tab_txt_color"
+            android:textColor="@color/post_time_and_comment"
             android:textStyle="bold"
             android:layout_alignParentRight="true" />
     </RelativeLayout>

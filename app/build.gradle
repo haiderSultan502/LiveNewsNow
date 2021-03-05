@@ -50,4 +50,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     //recycler view  library
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    // font awesome
+    implementation 'info.androidhive:fontawesome:0.0.5'
 }
