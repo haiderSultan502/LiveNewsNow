@@ -9,15 +9,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.webscare.livenewsnow.R;
+import com.webscare.livenewsnow.fragments.PostWebpageFragment;
 
 public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemViewHolder> {
 
     View view;
     Context context;
     String checkView;
+
+    PostWebpageFragment postWebpageFragment = new PostWebpageFragment();
 
     public NewsItemAdapter(Context context,String checkView){
         this.context  = context;
@@ -45,6 +49,19 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
     @Override
     public void onBindViewHolder(@NonNull NewsItemAdapter.ItemViewHolder holder, int position) {
 
+        holder.newsItemClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                postWebPageFragment();
+            }
+        });
+
+    }
+
+    private void postWebPageFragment() {
+        ((FragmentActivity)context).getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, postWebpageFragment).addToBackStack(null)
+                .commit();
     }
 
     @Override

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LiveNewsNow">
         <activity android:name=".MainActivity"
-            android:configChanges="uiMode">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,5 +18,5 @@
             </intent-filter>
         </activity>
     </application>
-
+<!--    android:configChanges="uiMode"-->
 </manifest>

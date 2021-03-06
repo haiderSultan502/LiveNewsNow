@@ -15,4 +15,11 @@
     <color name="post_time_and_comment">#575d69</color>
     <color name="app_bg_color">#06122b</color>
     <color name="category_title_color">#fafd00</color>
+    <color name="icon_color">#efefef</color>
+    <color name="post_title_text_color">#efefef</color>
+    <color name="post_detail_text_color">#a8a8a8</color>
+    <color name="share_icon_color">#fafd00</color>
+    <color name="bookmark_color">#fafd00</color>
+    <color name="timer_color">#9d9e9f</color>
+    <color name="timer_text_bg">#a8a8a8</color>
 </resources>
