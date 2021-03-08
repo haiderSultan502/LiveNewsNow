@@ -22,4 +22,5 @@
     <color name="bookmark_color">#fafd00</color>
     <color name="timer_color">#9d9e9f</color>
     <color name="timer_text_bg">#a8a8a8</color>
+    <color name="search_bg">#1a3771</color>
 </resources>

@@ -49,19 +49,20 @@
             android:layout_alignParentLeft="true"></ImageView>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_106sdp"
+            android:layout_height="@dimen/_16sdp"
             android:background="@drawable/bg_reading_time"
             android:gravity="center"
             android:layout_toRightOf="@+id/timer"
             android:layout_marginLeft="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_2sdp">
+            android:layout_marginTop="@dimen/_1sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="   Reading time: 3 min   "
-                android:textSize="@dimen/_10sdp"></TextView>
+                android:text="Reading time: 3 min"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginBottom="0.7sp"></TextView>
 
         </LinearLayout>
 

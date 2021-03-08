@@ -1,12 +1,16 @@
 package com.webscare.livenewsnow;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SearchView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DrawerLayout drawerLayout;
     ImageView btnDrawer;
     Switch switchDt;
+    SearchView searchView;
 
 
     @Override
@@ -40,6 +45,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawerLayout=findViewById(R.id.drawer_layout);
         btnDrawer=findViewById(R.id.btn_drawer);
         switchDt = findViewById(R.id.switch_dt);
+        searchView = findViewById(R.id.search_view);
+//        searchView.onActionViewExpanded();
+//        searchView.setIconified(false);
+//        searchView.clearFocus();
 
         viewPager = findViewById(R.id.view_pager);
         addTabs(viewPager);
@@ -57,10 +66,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void addTabs(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
-        adapter.addFrag(new HomeFragment(), "Home");
-        adapter.addFrag(new AmericanFragment(), "American");
-        adapter.addFrag(new AmericanFragment(), "Updates");
-        adapter.addFrag(new AmericanFragment(), "Business");
+        adapter.addFrag(new HomeFragment(), "HOME");
+        adapter.addFrag(new AmericanFragment(), "AMERICAN");
+        adapter.addFrag(new AmericanFragment(), "UPDATES");
+        adapter.addFrag(new AmericanFragment(), "BUSINESS");
 //        adapter.addFrag(new HomeFragment(), "Daily");
 //        adapter.addFrag(new HomeFragment(), "Magazine");
 //        adapter.addFrag(new HomeFragment(), "Sports");
