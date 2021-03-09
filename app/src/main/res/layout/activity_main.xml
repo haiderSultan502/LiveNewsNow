@@ -45,13 +45,13 @@
             android:layout_marginTop="@dimen/_1sdp"></ImageView>
 
         <RelativeLayout
-            android:id="@+id/btn_search_parent"
+            android:id="@+id/btn_filter_parent"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_25sdp"
             android:layout_alignParentRight="true">
 
             <ImageView
-                android:id="@+id/btn_search"
+                android:id="@+id/btn_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -61,13 +61,24 @@
 
     </RelativeLayout>
 
-    <com.google.android.material.tabs.TabLayout
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabs"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/app_bg_color"-->
+<!--        style="@style/CustomTextAppearanceTab"-->
+<!--        app:tabTextAppearance="@style/CustomTabText"/>-->
+
+    <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/app_bg_color"
-        style="@style/CustomTextAppearanceTab"
-        app:tabTextAppearance="@style/CustomTabText"/>
+        android:layout_height="@dimen/_35sdp"
+        android:textSize="@dimen/_8sdp"
+        app:pstsIndicatorHeight="@dimen/_2sdp"
+        app:pstsUnderlineHeight="@dimen/_10sdp"
+        android:textColor="@color/tab_txt_color"
+        app:pstsUnderlineColor="@color/post_title_color"
+        app:pstsIndicatorColor="@color/post_title_color"/>
 
 
     <androidx.appcompat.widget.SearchView
@@ -79,8 +90,17 @@
         android:layout_marginRight="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_12sdp"
         app:queryHint="Search here"
+        app:queryBackground="@color/search_bg"
         app:iconifiedByDefault="false"
-        app:searchIcon="@drawable/ic_baseline_search_24" />
+        android:visibility="gone"
+        app:searchIcon="@drawable/ic_baseline_search_24"
+        android:layoutAnimation="@anim/animation_for_search_view"/>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
@@ -88,6 +108,8 @@
         android:layout_height="match_parent"
         android:background="@color/app_bg_color"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </FrameLayout>
 
 
 </LinearLayout>

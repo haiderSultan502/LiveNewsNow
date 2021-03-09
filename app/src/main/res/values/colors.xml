@@ -23,4 +23,5 @@
     <color name="timer_color">#a8a8a8</color>
     <color name="timer_text_bg">#a8a8a8</color>
     <color name="search_bg">#e6e6e6</color>
+    <color name="search_icon_hint_color">#959595</color>
 </resources>

@@ -52,7 +52,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
         holder.newsItemClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                postWebPageFragment();
+                postWebPageFragment();
             }
         });
 

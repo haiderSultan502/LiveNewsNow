@@ -23,4 +23,6 @@
     <color name="timer_color">#9d9e9f</color>
     <color name="timer_text_bg">#a8a8a8</color>
     <color name="search_bg">#1a3771</color>
+    <color name="search_icon_hint_color">#c1c0c8</color>
+
 </resources>

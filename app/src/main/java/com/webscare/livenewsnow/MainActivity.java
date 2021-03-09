@@ -15,9 +15,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.google.android.material.tabs.TabLayout;
 import com.webscare.livenewsnow.fragments.AmericanFragment;
 import com.webscare.livenewsnow.fragments.HomeFragment;
@@ -25,12 +27,15 @@ import com.webscare.livenewsnow.adapters.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TabLayout tabLayout;
+//    TabLayout tabLayout;
+    PagerSlidingTabStrip tabLayout;
     ViewPager viewPager;
     DrawerLayout drawerLayout;
     ImageView btnDrawer;
     Switch switchDt;
     SearchView searchView;
+    RelativeLayout btnFilter;
+    Boolean checkSearchStatus = false;
 
 
     @Override
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDrawer=findViewById(R.id.btn_drawer);
         switchDt = findViewById(R.id.switch_dt);
         searchView = findViewById(R.id.search_view);
+        btnFilter = findViewById(R.id.btn_filter_parent);
 //        searchView.onActionViewExpanded();
 //        searchView.setIconified(false);
 //        searchView.clearFocus();
@@ -54,11 +60,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addTabs(viewPager);
 
         tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+//        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setViewPager(viewPager);
 
 
         btnDrawer.setOnClickListener(this);
         switchDt.setOnClickListener(this);
+        btnFilter.setOnClickListener(this);
 
 
 
@@ -70,11 +78,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFrag(new AmericanFragment(), "AMERICAN");
         adapter.addFrag(new AmericanFragment(), "UPDATES");
         adapter.addFrag(new AmericanFragment(), "BUSINESS");
-//        adapter.addFrag(new HomeFragment(), "Daily");
-//        adapter.addFrag(new HomeFragment(), "Magazine");
-//        adapter.addFrag(new HomeFragment(), "Sports");
-//        adapter.addFrag(new HomeFragment(), "Finance");
-//        adapter.addFrag(new HomeFragment(), "Politics");
+        adapter.addFrag(new HomeFragment(), "Daily");
+        adapter.addFrag(new HomeFragment(), "Magazine");
+        adapter.addFrag(new HomeFragment(), "Sports");
+        adapter.addFrag(new HomeFragment(), "Finance");
+        adapter.addFrag(new HomeFragment(), "Politics");
 
         viewPager.setAdapter(adapter);
     }
@@ -86,6 +94,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.btn_drawer:
                 drawerLayout.openDrawer(Gravity.LEFT);
+                break;
+            case R.id.btn_filter_parent:
+                if (checkSearchStatus)
+                {
+                    searchView.setVisibility(View.GONE);
+                    checkSearchStatus = false;
+                }
+                else {
+                    searchView.setVisibility(View.VISIBLE);
+                    searchView.scheduleLayoutAnimation();
+                    checkSearchStatus = true;
+                }
                 break;
             case R.id.switch_dt:
 
