@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.webscare.livenewsnow.MainActivity;
 import com.webscare.livenewsnow.R;
 import com.webscare.livenewsnow.adapters.NewsItemAdapter;
 
@@ -19,6 +20,7 @@ public class AmericanFragment extends Fragment {
     View view;
     RecyclerView rvNewsHomeHorizontally,rvNewsHomeVertically,rvNewsFinanceHorizontally;
     LinearLayoutManager linearLayoutManager;
+    MainActivity mainActivity = new MainActivity();
     public AmericanFragment(){
 
     }
@@ -34,6 +36,7 @@ public class AmericanFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_american, container, false);
 
+        mainActivity.checkFragStatus = "american";
         initializeView();
         showDataInView();
 

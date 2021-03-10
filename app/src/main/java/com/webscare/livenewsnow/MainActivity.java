@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.google.android.material.tabs.TabLayout;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.webscare.livenewsnow.fragments.AmericanFragment;
 import com.webscare.livenewsnow.fragments.HomeFragment;
 import com.webscare.livenewsnow.adapters.ViewPagerAdapter;
@@ -28,7 +30,8 @@ import com.webscare.livenewsnow.adapters.ViewPagerAdapter;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 //    TabLayout tabLayout;
-    PagerSlidingTabStrip tabLayout;
+//    PagerSlidingTabStrip tabLayout;
+    SmartTabLayout tabLayout;
     ViewPager viewPager;
     DrawerLayout drawerLayout;
     ImageView btnDrawer;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SearchView searchView;
     RelativeLayout btnFilter;
     Boolean checkSearchStatus = false;
+    public static String checkFragStatus;
 
 
     @Override
@@ -60,9 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addTabs(viewPager);
 
         tabLayout = findViewById(R.id.tabs);
-//        tabLayout.setupWithViewPager(viewPager);
         tabLayout.setViewPager(viewPager);
-
+//        tabLayout.setIndicatorColor(R.color.transparent_color);
 
         btnDrawer.setOnClickListener(this);
         switchDt.setOnClickListener(this);
@@ -78,11 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFrag(new AmericanFragment(), "AMERICAN");
         adapter.addFrag(new AmericanFragment(), "UPDATES");
         adapter.addFrag(new AmericanFragment(), "BUSINESS");
-        adapter.addFrag(new HomeFragment(), "Daily");
-        adapter.addFrag(new HomeFragment(), "Magazine");
-        adapter.addFrag(new HomeFragment(), "Sports");
-        adapter.addFrag(new HomeFragment(), "Finance");
-        adapter.addFrag(new HomeFragment(), "Politics");
+        adapter.addFrag(new AmericanFragment(), "DAILY");
+        adapter.addFrag(new AmericanFragment(), "MAGAZINE");
+        adapter.addFrag(new AmericanFragment(), "SPORTS");
+        adapter.addFrag(new AmericanFragment(), "FINANCE");
+        adapter.addFrag(new AmericanFragment(), "POLITICS");
 
         viewPager.setAdapter(adapter);
     }

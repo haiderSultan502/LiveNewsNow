@@ -12,6 +12,7 @@
     <color name="tab_txt_color">#aeb5c0</color>
     <color name="latest_news_bg">#f5f6f7</color>
     <color name="post_title_color">#09245b</color>
+    <color name="selected_tab_text_color">#09245b</color>
     <color name="post_time_and_comment">#c1c0c8</color>
     <color name="app_bg_color">#ffffff</color>
     <color name="category_title_color">#09245b</color>

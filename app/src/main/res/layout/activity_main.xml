@@ -61,24 +61,22 @@
 
     </RelativeLayout>
 
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/tabs"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/app_bg_color"-->
-<!--        style="@style/CustomTextAppearanceTab"-->
-<!--        app:tabTextAppearance="@style/CustomTabText"/>-->
-
-    <com.astuetz.PagerSlidingTabStrip
+    <com.ogaclejapan.smarttablayout.SmartTabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:textSize="@dimen/_8sdp"
-        app:pstsIndicatorHeight="@dimen/_2sdp"
-        app:pstsUnderlineHeight="@dimen/_10sdp"
-        android:textColor="@color/tab_txt_color"
-        app:pstsUnderlineColor="@color/post_title_color"
-        app:pstsIndicatorColor="@color/post_title_color"/>
+        android:layout_height="@dimen/_40sdp"
+        app:stl_indicatorInterpolation="smart"
+        app:stl_indicatorThickness="30dp"
+        app:stl_indicatorColor="@color/tab_indicator_color"
+        app:stl_underlineColor="@color/transparent_color"
+        app:stl_defaultTabTextColor="@drawable/custom_tab"
+        app:stl_customTabTextLayoutId="@layout/custom_tab"
+        app:stl_dividerColor="@color/transparent_color"
+        app:stl_dividerThickness="0dp"
+        app:stl_indicatorCornerRadius="18dp"
+        app:stl_indicatorGravity="center"
+        app:stl_underlineThickness="0dp"
+        ></com.ogaclejapan.smarttablayout.SmartTabLayout>
 
 
     <androidx.appcompat.widget.SearchView

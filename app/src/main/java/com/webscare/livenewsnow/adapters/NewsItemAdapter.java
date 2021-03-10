@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.webscare.livenewsnow.MainActivity;
 import com.webscare.livenewsnow.R;
 import com.webscare.livenewsnow.fragments.PostWebpageFragment;
 
@@ -20,6 +21,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
     View view;
     Context context;
     String checkView;
+    MainActivity mainActivity = new MainActivity();
 
     PostWebpageFragment postWebpageFragment = new PostWebpageFragment();
 
@@ -59,6 +61,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
     }
 
     private void postWebPageFragment() {
+
         ((FragmentActivity)context).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_layout, postWebpageFragment).addToBackStack(null)
                 .commit();

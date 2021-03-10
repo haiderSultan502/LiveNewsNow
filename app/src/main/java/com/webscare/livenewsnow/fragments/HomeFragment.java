@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.webscare.livenewsnow.MainActivity;
 import com.webscare.livenewsnow.R;
 import com.webscare.livenewsnow.adapters.NewsItemAdapter;
 
@@ -23,6 +24,7 @@ public class HomeFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     RelativeLayout rlNewsClick;
     PostWebpageFragment postWebpageFragment = new PostWebpageFragment();
+    MainActivity mainActivity = new MainActivity();
     public HomeFragment(){
 
     }
@@ -38,7 +40,7 @@ public class HomeFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-
+        mainActivity.checkFragStatus = "home";
         initializeView();
         showDataInView();
 
