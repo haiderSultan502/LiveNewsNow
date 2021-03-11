@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -26,11 +27,10 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.webscare.livenewsnow.fragments.AmericanFragment;
 import com.webscare.livenewsnow.fragments.HomeFragment;
 import com.webscare.livenewsnow.adapters.ViewPagerAdapter;
+import com.webscare.livenewsnow.fragments.VideoPlayerFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-//    TabLayout tabLayout;
-//    PagerSlidingTabStrip tabLayout;
     SmartTabLayout tabLayout;
     ViewPager viewPager;
     DrawerLayout drawerLayout;
@@ -39,7 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SearchView searchView;
     RelativeLayout btnFilter;
     Boolean checkSearchStatus = false;
+    TextView tvVideoPlayer;
     public static String checkFragStatus;
+
+    VideoPlayerFragment videoPlayerFragment = new VideoPlayerFragment();
 
 
     @Override
@@ -56,20 +59,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switchDt = findViewById(R.id.switch_dt);
         searchView = findViewById(R.id.search_view);
         btnFilter = findViewById(R.id.btn_filter_parent);
-//        searchView.onActionViewExpanded();
-//        searchView.setIconified(false);
-//        searchView.clearFocus();
+        tvVideoPlayer = findViewById(R.id.tv_video_player);
 
         viewPager = findViewById(R.id.view_pager);
         addTabs(viewPager);
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setViewPager(viewPager);
-//        tabLayout.setIndicatorColor(R.color.transparent_color);
 
         btnDrawer.setOnClickListener(this);
         switchDt.setOnClickListener(this);
         btnFilter.setOnClickListener(this);
+        tvVideoPlayer.setOnClickListener(this);
 
 
 
@@ -116,14 +117,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     switchDt.setChecked(true);
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                    setTheme(android.R.style.Theme_Black);
-//                    recreate();
                 }
                 else
                 {
                     switchDt.setChecked(false);
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
+                break;
+            case R.id.tv_video_player:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout_parent, videoPlayerFragment).addToBackStack(null)
+                        .commit();
                 break;
         }
 

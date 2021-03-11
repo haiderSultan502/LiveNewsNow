@@ -25,5 +25,6 @@
     <color name="timer_text_bg">#a8a8a8</color>
     <color name="search_bg">#1a3771</color>
     <color name="search_icon_hint_color">#c1c0c8</color>
+    <color name="upate_text_color">#9a9b9d</color>
 
 </resources>

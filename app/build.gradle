@@ -66,14 +66,8 @@ dependencies {
         //Optional: see how to use the utility.
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
 
-//
-//// For legacy android support library (28.0.0)
-//
-//    implementation 'com.ogaclejapan.smarttablayout:library:1.7.0@aar'
-//
-//        //Optional: see how to use the utility.
-//    implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.7.0@aar'
-//
-//        //Deprecated since 1.7.0
-//    implementation 'com.ogaclejapan.smarttablayout:utils-v13:1.7.0@aar'
+    implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.16'  // for using this library : In repositries  add this line maven { url 'https://jitpack.io' }
+
+
+
 }
