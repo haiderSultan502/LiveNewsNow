@@ -38,4 +38,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return fragmentTitleList.get(position);
     }
 
+
+
 }

@@ -5,7 +5,6 @@
   android:layout_width="wrap_content"
   android:layout_height="match_parent"
   android:gravity="center"
-    android:textStyle="normal"
   android:paddingLeft="@dimen/_16sdp"
   android:paddingRight="@dimen/_16sdp"
   android:textColor="@drawable/custom_tab"
