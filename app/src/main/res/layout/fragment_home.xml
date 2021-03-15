@@ -128,7 +128,7 @@
                 android:paddingTop="@dimen/_10sdp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_news_finance_horizontally"
+                    android:id="@+id/rv_news_category_horizontally"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
@@ -140,7 +140,7 @@
                 android:paddingLeft="@dimen/_10sdp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_news_finance_vertically"
+                    android:id="@+id/rv_news_category_vertically"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 

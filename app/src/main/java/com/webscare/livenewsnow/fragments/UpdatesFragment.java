@@ -17,14 +17,14 @@ import com.webscare.livenewsnow.MainActivity;
 import com.webscare.livenewsnow.R;
 import com.webscare.livenewsnow.adapters.NewsItemAdapter;
 
-public class AmericanFragment extends Fragment {
+public class UpdatesFragment extends Fragment {
 
     View view;
     RecyclerView rvNewsHorizontally,rvNewsVertically,rvNewsHorizontallyMore;
     LinearLayoutManager linearLayoutManager;
     FrameLayout frameLayoutAF;
 
-    public AmericanFragment(){
+    public UpdatesFragment(){
 
     }
 
@@ -37,7 +37,7 @@ public class AmericanFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_american, container, false);
+        view = inflater.inflate(R.layout.fragment_updates, container, false);
 
 //        Log.d("call","all");
 

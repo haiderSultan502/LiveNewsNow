@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,18 +15,29 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.webscare.livenewsnow.MainActivity;
+import com.webscare.livenewsnow.Interface.InterfaceApi;
+import com.webscare.livenewsnow.ModelsClasses.NewsModel;
 import com.webscare.livenewsnow.R;
+import com.webscare.livenewsnow.RetrofitLibrary;
 import com.webscare.livenewsnow.adapters.NewsItemAdapter;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
     View view;
-    RecyclerView rvNewsHorizontally,rvNewsVertically,rvNewsFinanceHorizontally,rvNewsFinanceVertically;
+    RecyclerView rvNewsHorizontally,rvNewsVertically,rvNewsCategoryHorizontally,rvNewsCategoryVertically;
     LinearLayoutManager linearLayoutManager;
     RelativeLayout rlNewsClick;
     PostWebpageFragment postWebpageFragment = new PostWebpageFragment();
-    MainActivity mainActivity = new MainActivity();
+    FrameLayout frameLayoutHF;
+    InterfaceApi interfaceApi;
+    Call<List<NewsModel>> callForTopStories;
+
     public HomeFragment(){
 
     }
@@ -40,12 +53,12 @@ public class HomeFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mainActivity.checkFragStatus = "home";
         initializeView();
         showDataInView();
 
         return view;
     }
+
 
     private void showDataInView() {
 
@@ -54,18 +67,19 @@ public class HomeFragment extends Fragment {
         NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically");
         rvNewsVertically.setAdapter(newsItemAdapterVr);
         NewsItemAdapter newsItemAdapterHrFinance = new NewsItemAdapter(getActivity(),"rvHorizontally");
-        rvNewsFinanceHorizontally.setAdapter(newsItemAdapterHrFinance);
+        rvNewsCategoryHorizontally.setAdapter(newsItemAdapterHrFinance);
         NewsItemAdapter newsItemAdapterVrFinance = new NewsItemAdapter(getActivity(),"rvVertically");
-        rvNewsFinanceVertically.setAdapter(newsItemAdapterVrFinance);
+        rvNewsCategoryVertically.setAdapter(newsItemAdapterVrFinance);
     }
 
     private void initializeView() {
 
         rvNewsHorizontally=view.findViewById(R.id.rv_news_home_horizontally);
         rvNewsVertically=view.findViewById(R.id.rv_news_home_vertically);
-        rvNewsFinanceHorizontally=view.findViewById(R.id.rv_news_finance_horizontally);
-        rvNewsFinanceVertically=view.findViewById(R.id.rv_news_finance_vertically);
+        rvNewsCategoryHorizontally=view.findViewById(R.id.rv_news_category_horizontally);
+        rvNewsCategoryVertically=view.findViewById(R.id.rv_news_category_vertically);
         rlNewsClick= view.findViewById(R.id.news_click);
+        frameLayoutHF = view.findViewById(R.id.frame_layout);
         rlNewsClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,17 +93,44 @@ public class HomeFragment extends Fragment {
         setOrientationFinanceHorizontallRv();
         setOrientationFinanceVerticallyRv();
 
+        getTopStories("https://www.livenewsnow.com/wp-json/newspaper/v2/");
+
+    }
+
+    private void getTopStories(String url) {
+        interfaceApi = RetrofitLibrary.connect(url);
+        callForTopStories = interfaceApi.getTopStories();
+        callForTopStories.enqueue(new Callback<List<NewsModel>>() {
+            @Override
+            public void onResponse(Call<List<NewsModel>> call, Response<List<NewsModel>> response) {
+
+                if (!response.isSuccessful())
+                {
+                    Toast.makeText(getActivity(), "Please try later", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<NewsModel>> call, Throwable t) {
+
+            }
+        });
+
     }
 
     private void setOrientationFinanceHorizontallRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvNewsFinanceHorizontally.setLayoutManager(linearLayoutManager);
+        rvNewsCategoryHorizontally.setLayoutManager(linearLayoutManager);
     }
+
     private void setOrientationFinanceVerticallyRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvNewsFinanceVertically.setLayoutManager(linearLayoutManager);
+        rvNewsCategoryVertically.setLayoutManager(linearLayoutManager);
     }
 
     private void setOrientationNewsVerticallyRv() {

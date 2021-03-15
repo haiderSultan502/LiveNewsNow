@@ -2,7 +2,7 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frame_layout"
+    android:id="@+id/frame_layout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,7 +28,7 @@
         android:paddingTop="@dimen/_10sdp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_top_news_american_horizontally"
+            android:id="@+id/rv_news_horizontally"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
@@ -41,7 +41,7 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_news_american_vertically"
+            android:id="@+id/rv_news_vertically"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
@@ -56,7 +56,7 @@
         android:paddingBottom="@dimen/_10sdp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_news_american_horizontally"
+            android:id="@+id/rv_news_horizontally_more"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>

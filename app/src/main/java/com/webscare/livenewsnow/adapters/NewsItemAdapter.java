@@ -22,7 +22,6 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
     Context context;
     String checkView;
     MainActivity mainActivity = new MainActivity();
-
     PostWebpageFragment postWebpageFragment = new PostWebpageFragment();
 
     public NewsItemAdapter(Context context,String checkView){
@@ -51,21 +50,42 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
     @Override
     public void onBindViewHolder(@NonNull NewsItemAdapter.ItemViewHolder holder, int position) {
 
+
+
         holder.newsItemClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postWebPageFragment();
+
+                String checkFragmentStatus = mainActivity.checkFragStatus;
+                switch (checkFragmentStatus)
+                {
+                    case "homeFragment":
+                        postWebPageFragment(R.id.frame_layout);
+                        break;
+                    case "americanFragment":
+                        postWebPageFragment(R.id.frame_layout2);
+                        break;
+                    case "updatesFragment":
+                        postWebPageFragment(R.id.frame_layout3);
+                        break;
+                    case "businessFragment":
+                        postWebPageFragment(R.id.frame_layout4);
+                        break;
+
+                }
             }
         });
 
     }
 
-    private void postWebPageFragment() {
+    private void postWebPageFragment(int frameLayoutID) {
 
         ((FragmentActivity)context).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_layout, postWebpageFragment).addToBackStack(null)
+                .replace(frameLayoutID, postWebpageFragment).addToBackStack(null)
                 .commit();
     }
+
+
 
     @Override
     public int getItemCount() {
