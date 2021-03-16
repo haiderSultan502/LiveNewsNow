@@ -18,7 +18,7 @@
             android:id="@+id/img_news_item_title"
             android:layout_width  ="match_parent"
             android:layout_height ="match_parent"
-            android:src="@drawable/img1"
+            android:src="@drawable/image_search"
             android:scaleType="centerCrop"/>
 
     </androidx.cardview.widget.CardView>
@@ -27,7 +27,7 @@
     <TextView
         android:id="@+id/tv_news_item_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_28sdp"
         android:text="Saudi Crown Prince Approved Killing..."
         android:textSize="@dimen/_11sdp"
         android:textColor="@color/post_title_color"

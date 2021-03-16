@@ -49,12 +49,12 @@ public class UpdatesFragment extends Fragment {
 
     private void showDataInView() {
 
-        NewsItemAdapter newsItemAdapterTopHr = new NewsItemAdapter(getActivity(),"rvTopHorizontally");
-        rvNewsHorizontally.setAdapter(newsItemAdapterTopHr);
-        NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically");
-        rvNewsVertically.setAdapter(newsItemAdapterVr);
-        NewsItemAdapter newsItemAdapterHrFinance = new NewsItemAdapter(getActivity(),"rvHorizontally");
-        rvNewsHorizontallyMore.setAdapter(newsItemAdapterHrFinance);
+        //        NewsItemAdapter newsItemAdapterTopHr = new NewsItemAdapter(getActivity(),"rvTopHorizontally");
+//        rvNewsHorizontally.setAdapter(newsItemAdapterTopHr);
+//        NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically");
+//        rvNewsVertically.setAdapter(newsItemAdapterVr);
+//        NewsItemAdapter newsItemAdapterHrFeatured = new NewsItemAdapter(getActivity(),"rvHorizontally");
+//        rvNewsHorizontallyMore.setAdapter(newsItemAdapterHrFeatured);
 
     }
 

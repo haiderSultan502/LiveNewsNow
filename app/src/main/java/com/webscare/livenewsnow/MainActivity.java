@@ -21,6 +21,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Animation animation;
     public static String checkFragStatus;
     public static int fragmentsCount;
+    public static LinearLayout lootieAnimaationLayout;
+
 
     VideoPlayerFragment videoPlayerFragment = new VideoPlayerFragment();
 
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPager.setOffscreenPageLimit(9);  // system keep 9 page instances on both sides of the current page in memory  // its save the page in memory so when move back then page not reload otherwise page load again, and the param value in function represent how much pages save in memory
         addTabs(viewPager);
         tabLayout.setViewPager(viewPager);
+        lootieAnimaationLayout=findViewById(R.id.lootie_animation_layout);
 
 
         viewPagerPageChangeListener();
@@ -220,8 +224,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (getFragmentManager().getBackStackEntryCount() != 0) {
-            getFragmentManager().popBackStack();
-        }
+
+//        if (viewPager.getCurrentItem() == 1 || viewPager.getCurrentItem() == 2 || viewPager.getCurrentItem() == 3) {
+
+            if (getFragmentManager().getBackStackEntryCount() != 0) {
+                getFragmentManager().popBackStack();
+            }
+
+//            viewPager.setCurrentItem(0, true);
+//        } else {
+//            super.onBackPressed(); // This will pop the Activity from the stack.
+//        }
+
+
+//        if (getFragmentManager().getBackStackEntryCount() != 0) {
+//            getFragmentManager().popBackStack();
+//        }
+    }
+
+    public static void animationShow()
+    {
+
+        lootieAnimaationLayout.setVisibility(View.VISIBLE);
+    }
+    public static void animationHide()
+    {
+        lootieAnimaationLayout.setVisibility(View.GONE);
     }
 }

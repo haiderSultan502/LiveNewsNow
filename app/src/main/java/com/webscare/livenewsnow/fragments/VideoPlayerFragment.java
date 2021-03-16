@@ -42,10 +42,10 @@ public class VideoPlayerFragment extends Fragment implements View.OnClickListene
 
     private void showDataInView() {
 
-        NewsItemAdapter newsItemAdapterHr = new NewsItemAdapter(getActivity(),"rvHorizontally");
-        rvNewsHorizontally.setAdapter(newsItemAdapterHr);
-        NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically");
-        rvNewsVertically.setAdapter(newsItemAdapterVr);
+//        NewsItemAdapter newsItemAdapterHr = new NewsItemAdapter(getActivity(),"rvHorizontally");
+//        rvNewsHorizontally.setAdapter(newsItemAdapterHr);
+//        NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically");
+//        rvNewsVertically.setAdapter(newsItemAdapterVr);
     }
 
     private void initializeView() {

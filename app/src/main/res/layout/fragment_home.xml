@@ -35,15 +35,15 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/img_news_home"
+                android:id="@+id/thumbnail_top_stories"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/slider_image"/>
+                android:src="@drawable/image_search"/>
 
             <TextView
-                android:id="@+id/news_title"
+                android:id="@+id/news_title_top_stories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_news"
@@ -103,16 +103,18 @@
     </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/tv_featured_title"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/latest_news_bg"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:gravity="center_vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Finance"
+                    android:text="Featured"
                     android:textSize="@dimen/_12sdp"
                     android:textColor="@color/category_title_color"
                     android:textStyle="bold"
@@ -131,6 +133,13 @@
                     android:id="@+id/rv_news_category_horizontally"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal"></ProgressBar>
 
             </LinearLayout>
             <LinearLayout

@@ -1,11 +1,17 @@
 package com.webscare.livenewsnow.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,12 +21,15 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
 import com.webscare.livenewsnow.Interface.InterfaceApi;
+import com.webscare.livenewsnow.MainActivity;
 import com.webscare.livenewsnow.ModelsClasses.NewsModel;
 import com.webscare.livenewsnow.R;
 import com.webscare.livenewsnow.RetrofitLibrary;
 import com.webscare.livenewsnow.adapters.NewsItemAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,8 +44,23 @@ public class HomeFragment extends Fragment {
     RelativeLayout rlNewsClick;
     PostWebpageFragment postWebpageFragment = new PostWebpageFragment();
     FrameLayout frameLayoutHF;
+    LinearLayout layoutFeaturedTitle;
     InterfaceApi interfaceApi;
-    Call<List<NewsModel>> callForTopStories;
+    ImageView thumbnailTopStoryImv;
+    TextView thumbnailTopStoryTitleTv;
+    Boolean isScrooling = false;
+    int currentItem,totalItems,scrollOutItems;
+
+    ProgressBar progressBar;
+    MainActivity mainActivity = new MainActivity();
+
+    Call<List<NewsModel>> callForNews;
+    ArrayList<NewsModel> arrayListTopStories,arrayListTopStoriesHr,arrayListTopStoriesVr,arrayListFeaturedNewsHr,arrayListFeaturedNewsVr;
+    String thumbnailTopStoryStr,thumbnailTopStoryTitleStr,categortIDAndPageNumber;
+    NewsItemAdapter newsItemAdapterHrFeatured;
+
+    String url= "https://www.livenewsnow.com/wp-json/wp/v2/";
+    int pageNumber = 1;
 
     public HomeFragment(){
 
@@ -54,7 +78,6 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
         initializeView();
-        showDataInView();
 
         return view;
     }
@@ -62,14 +85,15 @@ public class HomeFragment extends Fragment {
 
     private void showDataInView() {
 
-        NewsItemAdapter newsItemAdapterHr = new NewsItemAdapter(getActivity(),"rvHorizontally");
+        NewsItemAdapter newsItemAdapterHr = new NewsItemAdapter(getActivity(),"rvHorizontally",arrayListTopStoriesHr);
         rvNewsHorizontally.setAdapter(newsItemAdapterHr);
-        NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically");
+        NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically",arrayListTopStoriesVr);
         rvNewsVertically.setAdapter(newsItemAdapterVr);
-        NewsItemAdapter newsItemAdapterHrFinance = new NewsItemAdapter(getActivity(),"rvHorizontally");
-        rvNewsCategoryHorizontally.setAdapter(newsItemAdapterHrFinance);
-        NewsItemAdapter newsItemAdapterVrFinance = new NewsItemAdapter(getActivity(),"rvVertically");
-        rvNewsCategoryVertically.setAdapter(newsItemAdapterVrFinance);
+//        NewsItemAdapter newsItemAdapterVrFinance = new NewsItemAdapter(getActivity(),"rvVertically");
+//        rvNewsCategoryVertically.setAdapter(newsItemAdapterVrFinance);
+
+        mainActivity.animationHide();
+
     }
 
     private void initializeView() {
@@ -80,6 +104,17 @@ public class HomeFragment extends Fragment {
         rvNewsCategoryVertically=view.findViewById(R.id.rv_news_category_vertically);
         rlNewsClick= view.findViewById(R.id.news_click);
         frameLayoutHF = view.findViewById(R.id.frame_layout);
+        thumbnailTopStoryImv = view.findViewById(R.id.thumbnail_top_stories);
+        thumbnailTopStoryTitleTv = view.findViewById(R.id.news_title_top_stories);
+        progressBar = view.findViewById(R.id.progress_bar);
+
+        arrayListTopStories = new ArrayList<>();
+        arrayListTopStoriesHr = new ArrayList<>();
+        arrayListTopStoriesVr = new ArrayList<>();
+        arrayListFeaturedNewsHr = new ArrayList<>();
+        arrayListFeaturedNewsVr = new ArrayList<>();
+
+
         rlNewsClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,17 +125,18 @@ public class HomeFragment extends Fragment {
         });
         setOrientationNewsHorizontallRv();
         setOrientationNewsVerticallyRv();
-        setOrientationFinanceHorizontallRv();
-        setOrientationFinanceVerticallyRv();
+        setOrientationFeaturedHorizontallRv();
+        setOrientationFeaturedVerticallyRv();
 
-        getTopStories("https://www.livenewsnow.com/wp-json/newspaper/v2/");
+        getTopStories("https://www.livenewsnow.com/wp-json/wp/v2/");
 
     }
 
     private void getTopStories(String url) {
+
         interfaceApi = RetrofitLibrary.connect(url);
-        callForTopStories = interfaceApi.getTopStories();
-        callForTopStories.enqueue(new Callback<List<NewsModel>>() {
+        callForNews = interfaceApi.getTopStories();
+        callForNews.enqueue(new Callback<List<NewsModel>>() {
             @Override
             public void onResponse(Call<List<NewsModel>> call, Response<List<NewsModel>> response) {
 
@@ -108,6 +144,34 @@ public class HomeFragment extends Fragment {
                 {
                     Toast.makeText(getActivity(), "Please try later", Toast.LENGTH_SHORT).show();
                 }
+
+                arrayListTopStories = (ArrayList<NewsModel>) response.body();
+
+                thumbnailTopStoryStr = arrayListTopStories.get(0).getFeaturedMedia().get(0);
+                thumbnailTopStoryTitleStr = arrayListTopStories.get(0).getTitle();
+
+                Picasso.with(getActivity()).load(thumbnailTopStoryStr).placeholder(R.drawable.image_search).error(R.drawable.image_search).into(thumbnailTopStoryImv);
+                thumbnailTopStoryTitleTv.setText(thumbnailTopStoryTitleStr);
+
+                for (int i = 1 ; i <= 5 ; i++)
+                {
+                    arrayListTopStoriesHr.add(arrayListTopStories.get(i));
+                }
+
+                for (int i = 6 ; i <= 10 ; i++)
+                {
+                    arrayListTopStoriesVr.add(arrayListTopStories.get(i));
+                }
+
+//                getFeaturedNews(pageNumber);
+
+                showDataInView();
+
+
+
+
+
+
 
 
 
@@ -121,13 +185,112 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void setOrientationFinanceHorizontallRv() {
+    private void getFeaturedNews(int pageNumber) {
+
+        categortIDAndPageNumber = " 2 | " +  String.valueOf(pageNumber);
+        interfaceApi = RetrofitLibrary.connect(url);
+        callForNews = interfaceApi.getAllCategoriesNews(categortIDAndPageNumber);
+        callForNews.enqueue(new Callback<List<NewsModel>>() {
+            @Override
+            public void onResponse(Call<List<NewsModel>> call, Response<List<NewsModel>> response) {
+
+                if (!response.isSuccessful())
+                {
+                    Toast.makeText(getActivity(), "Please try later", Toast.LENGTH_SHORT).show();
+                }
+
+                arrayListFeaturedNewsHr = (ArrayList<NewsModel>) response.body();
+
+                if (arrayListFeaturedNewsHr.size() == 0)
+                {
+                    layoutFeaturedTitle.setVisibility(View.GONE);
+                }
+                else {
+
+                    if (pageNumber == 1)
+                    {
+                        showFeaturedNews();
+                    }
+
+                    newsItemAdapterHrFeatured.notifyDataSetChanged();
+                    newsItemAdapterHrFeatured.notifyItemRangeInserted(newsItemAdapterHrFeatured.getItemCount() , arrayListFeaturedNewsHr.size());
+
+                    loadMore();
+                }
+
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<NewsModel>> call, Throwable t) {
+
+            }
+        });
+
+
+
+    }
+
+    private void showFeaturedNews() {
+
+        newsItemAdapterHrFeatured = new NewsItemAdapter(getActivity(),"rvHorizontally",arrayListFeaturedNewsHr);
+        rvNewsCategoryHorizontally.setAdapter(newsItemAdapterHrFeatured);
+    }
+
+    private void loadMore() {
+
+        rvNewsCategoryHorizontally.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
+                {
+                    isScrooling = true;
+                }
+            }
+
+            @Override   //method called when scrolling end
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                currentItem = linearLayoutManager.getChildCount();
+                totalItems = linearLayoutManager.getItemCount();
+                scrollOutItems = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (isScrooling && (currentItem + scrollOutItems == totalItems))
+                {
+                    isScrooling = false;
+                    fetchData();
+                }
+            }
+        });
+    }
+
+    private void fetchData() {
+
+        progressBar.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pageNumber++;
+                getFeaturedNews(pageNumber);
+
+                progressBar.setVisibility(View.GONE);
+
+            }
+        },5000);
+    }
+
+    private void setOrientationFeaturedHorizontallRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvNewsCategoryHorizontally.setLayoutManager(linearLayoutManager);
     }
 
-    private void setOrientationFinanceVerticallyRv() {
+    private void setOrientationFeaturedVerticallyRv() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvNewsCategoryVertically.setLayoutManager(linearLayoutManager);

@@ -12,21 +12,30 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
 import com.webscare.livenewsnow.MainActivity;
+import com.webscare.livenewsnow.ModelsClasses.NewsModel;
 import com.webscare.livenewsnow.R;
 import com.webscare.livenewsnow.fragments.PostWebpageFragment;
+
+import java.util.ArrayList;
 
 public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemViewHolder> {
 
     View view;
     Context context;
-    String checkView;
+    String checkView,newsThumbnail,newsTitle;
     MainActivity mainActivity = new MainActivity();
+    ArrayList<NewsModel> arrayListHomeNews;
     PostWebpageFragment postWebpageFragment = new PostWebpageFragment();
 
-    public NewsItemAdapter(Context context,String checkView){
+    public NewsItemAdapter(Context context, String checkView, ArrayList<NewsModel> arrayListHomeNews){
+
+        this.arrayListHomeNews = new ArrayList<>();
+
         this.context  = context;
         this.checkView = checkView;
+        this.arrayListHomeNews = arrayListHomeNews;
     }
     @NonNull
     @Override
@@ -51,6 +60,11 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
     public void onBindViewHolder(@NonNull NewsItemAdapter.ItemViewHolder holder, int position) {
 
 
+        newsThumbnail = arrayListHomeNews.get(position).getFeaturedMedia().get(0);
+        newsTitle = arrayListHomeNews.get(position).getTitle();
+
+        Picasso.with(context).load(newsThumbnail).placeholder(R.drawable.image_search).error(R.drawable.image_search).into(holder.imgNews);
+        holder.tvNewsTitle.setText(newsTitle);
 
         holder.newsItemClick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +90,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
             }
         });
 
+
     }
 
     private void postWebPageFragment(int frameLayoutID) {
@@ -89,7 +104,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
 
     @Override
     public int getItemCount() {
-        return 4;
+        return arrayListHomeNews.size();
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder
