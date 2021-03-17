@@ -52,14 +52,13 @@ public class HomeFragment extends Fragment {
     int currentItem,totalItems,scrollOutItems;
 
     ProgressBar progressBar;
-    MainActivity mainActivity = new MainActivity();
 
     Call<List<NewsModel>> callForNews;
     ArrayList<NewsModel> arrayListTopStories,arrayListTopStoriesHr,arrayListTopStoriesVr,arrayListFeaturedNewsHr,arrayListFeaturedNewsVr;
     String thumbnailTopStoryStr,thumbnailTopStoryTitleStr,categortIDAndPageNumber;
     NewsItemAdapter newsItemAdapterHrFeatured;
 
-    String url= "https://www.livenewsnow.com/wp-json/wp/v2/";
+    String url= "https://www.livenewsnow.com/wp-json/Newspaper/v2/";
     int pageNumber = 1;
 
     public HomeFragment(){
@@ -83,6 +82,7 @@ public class HomeFragment extends Fragment {
     }
 
 
+
     private void showDataInView() {
 
         NewsItemAdapter newsItemAdapterHr = new NewsItemAdapter(getActivity(),"rvHorizontally",arrayListTopStoriesHr);
@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
 //        NewsItemAdapter newsItemAdapterVrFinance = new NewsItemAdapter(getActivity(),"rvVertically");
 //        rvNewsCategoryVertically.setAdapter(newsItemAdapterVrFinance);
 
-        mainActivity.animationHide();
+        MainActivity.animationHide();
 
     }
 
@@ -128,7 +128,7 @@ public class HomeFragment extends Fragment {
         setOrientationFeaturedHorizontallRv();
         setOrientationFeaturedVerticallyRv();
 
-        getTopStories("https://www.livenewsnow.com/wp-json/wp/v2/");
+        getTopStories("https://www.livenewsnow.com/wp-json/Newspaper/v2/");
 
     }
 
@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment {
                 thumbnailTopStoryStr = arrayListTopStories.get(0).getFeaturedMedia().get(0);
                 thumbnailTopStoryTitleStr = arrayListTopStories.get(0).getTitle();
 
-                Picasso.with(getActivity()).load(thumbnailTopStoryStr).placeholder(R.drawable.image_search).error(R.drawable.image_search).into(thumbnailTopStoryImv);
+                Picasso.with(getActivity()).load(thumbnailTopStoryStr).placeholder(R.drawable.loading).error(R.drawable.loading).into(thumbnailTopStoryImv);
                 thumbnailTopStoryTitleTv.setText(thumbnailTopStoryTitleStr);
 
                 for (int i = 1 ; i <= 5 ; i++)
@@ -166,14 +166,6 @@ public class HomeFragment extends Fragment {
 //                getFeaturedNews(pageNumber);
 
                 showDataInView();
-
-
-
-
-
-
-
-
 
             }
 

@@ -102,11 +102,7 @@
         app:searchIcon="@drawable/ic_baseline_search_24" />
 <!--    android:layoutAnimation="@anim/animation_for_search_view"-->
 
-<!--    <FrameLayout-->
-<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--        android:id="@+id/frame_layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
+
 
 
     <LinearLayout
@@ -126,14 +122,24 @@
             app:lottie_rawRes="@raw/loading"/>
     </LinearLayout>
 
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/frame_layout_at_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/app_bg_color"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-<!--    </FrameLayout>-->
+    </androidx.viewpager.widget.ViewPager>
+
+    </FrameLayout>
 
 
 </LinearLayout>

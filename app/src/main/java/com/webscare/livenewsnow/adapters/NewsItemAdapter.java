@@ -1,6 +1,7 @@
 package com.webscare.livenewsnow.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
 
     View view;
     Context context;
-    String checkView,newsThumbnail,newsTitle;
+    String checkView,newsThumbnail,newsTitle,newsUrl;
     MainActivity mainActivity = new MainActivity();
     ArrayList<NewsModel> arrayListHomeNews;
     PostWebpageFragment postWebpageFragment = new PostWebpageFragment();
@@ -63,12 +64,15 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
         newsThumbnail = arrayListHomeNews.get(position).getFeaturedMedia().get(0);
         newsTitle = arrayListHomeNews.get(position).getTitle();
 
-        Picasso.with(context).load(newsThumbnail).placeholder(R.drawable.image_search).error(R.drawable.image_search).into(holder.imgNews);
+        Picasso.with(context).load(newsThumbnail).placeholder(R.drawable.loading).error(R.drawable.loading).into(holder.imgNews);
         holder.tvNewsTitle.setText(newsTitle);
 
         holder.newsItemClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+//                Bundle bundle = new Bundle();
+//                bundle.putString("newsUrl",arrayListNews.get(position).getGuid());
 
                 String checkFragmentStatus = mainActivity.checkFragStatus;
                 switch (checkFragmentStatus)

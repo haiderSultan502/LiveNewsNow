@@ -15,4 +15,7 @@ public interface InterfaceApi {
 
     @GET("posts")
     Call<List<NewsModel>> getAllCategoriesNews(@Query("cat") String categoryIdAndPageNumber);
+
+    @GET("search")
+    Call<List<NewsModel>> getSearchNews(@Query("s") String searchKeyword);
 }

@@ -32,6 +32,7 @@ import com.webscare.livenewsnow.fragments.AmericanFragment;
 import com.webscare.livenewsnow.fragments.BusinessFragment;
 import com.webscare.livenewsnow.fragments.HomeFragment;
 import com.webscare.livenewsnow.adapters.ViewPagerAdapter;
+import com.webscare.livenewsnow.fragments.SearchFragment;
 import com.webscare.livenewsnow.fragments.UpdatesFragment;
 import com.webscare.livenewsnow.fragments.VideoPlayerFragment;
 
@@ -44,12 +45,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Switch switchDt;
     SearchView searchView;
     RelativeLayout btnFilter;
-    Boolean checkSearchStatus = false;
+    Boolean checkSearchViewStatus = false, seachStatus = false;
     TextView tvVideoPlayer;
     Animation animation;
     public static String checkFragStatus;
     public static int fragmentsCount;
     public static LinearLayout lootieAnimaationLayout;
+    String searchPostKeyword;
 
 
     VideoPlayerFragment videoPlayerFragment = new VideoPlayerFragment();
@@ -85,6 +87,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switchDt.setOnClickListener(this);
         btnFilter.setOnClickListener(this);
         tvVideoPlayer.setOnClickListener(this);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                SearchFragment searchFragment = new SearchFragment(MainActivity.this,searchPostKeyword);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout_at_viewpager, searchFragment).addToBackStack(null)
+                        .commit();
+
+                seachStatus = true;
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                searchPostKeyword = newText;
+
+                return false;
+            }
+        });
 
 
 
@@ -188,15 +213,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 searchView.setAnimation(animation);
 
-                if (checkSearchStatus)
+                if (checkSearchViewStatus)
                 {
                     searchView.setVisibility(View.GONE);
-                    checkSearchStatus = false;
+                    checkSearchViewStatus = false;
                 }
                 else {
                     searchView.setVisibility(View.VISIBLE);
 //                    searchView.scheduleLayoutAnimation();
-                    checkSearchStatus = true;
+                    checkSearchViewStatus = true;
+
                 }
                 break;
             case R.id.switch_dt:
@@ -220,16 +246,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
+        if (seachStatus == true)
+//
+        {
+            getSupportFragmentManager().popBackStack();
+//            getFragmentManager().popBackStack();
+//            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
+//            adapter.getItem(1);
+//            viewPager.setCurrentItem(0, true);
+        }
+
 //        if (viewPager.getCurrentItem() == 1 || viewPager.getCurrentItem() == 2 || viewPager.getCurrentItem() == 3) {
 
-            if (getFragmentManager().getBackStackEntryCount() != 0) {
-                getFragmentManager().popBackStack();
-            }
+//            if (getFragmentManager().getBackStackEntryCount() != 0) {
+//                getFragmentManager().popBackStack();
+//            }
 
 //            viewPager.setCurrentItem(0, true);
 //        } else {
