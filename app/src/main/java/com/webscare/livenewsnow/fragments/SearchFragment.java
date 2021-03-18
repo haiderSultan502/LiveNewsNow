@@ -33,7 +33,7 @@ public class SearchFragment extends Fragment {
     RecyclerView recyclerViewSearchtNews;
     LinearLayoutManager linearLayoutManager;
     View view;
-    Button click;
+//    Button click;
 
     String searchKeyword;
     Context context;
@@ -70,15 +70,15 @@ public class SearchFragment extends Fragment {
 
         recyclerViewSearchtNews=view.findViewById(R.id.rv_search_news);
         arrayListSearchNews = new ArrayList<>();
-        click = view.findViewById(R.id.click);
-        click.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getFragmentManager().getBackStackEntryCount() != 0) {
-                getFragmentManager().popBackStack();
-            }
-            }
-        });
+//        click = view.findViewById(R.id.click);
+//        click.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (getFragmentManager().getBackStackEntryCount() != 0) {
+//                getFragmentManager().popBackStack();
+//            }
+//            }
+//        });
 
         setOrientationSearchRv();
 

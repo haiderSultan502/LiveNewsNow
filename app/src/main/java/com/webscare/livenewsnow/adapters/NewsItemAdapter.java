@@ -64,15 +64,24 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
         newsThumbnail = arrayListHomeNews.get(position).getFeaturedMedia().get(0);
         newsTitle = arrayListHomeNews.get(position).getTitle();
 
+
         Picasso.with(context).load(newsThumbnail).placeholder(R.drawable.loading).error(R.drawable.loading).into(holder.imgNews);
         holder.tvNewsTitle.setText(newsTitle);
+
+
 
         holder.newsItemClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                Bundle bundle = new Bundle();
-//                bundle.putString("newsUrl",arrayListNews.get(position).getGuid());
+                newsUrl = arrayListHomeNews.get(position).getGuid();
+                newsThumbnail = arrayListHomeNews.get(position).getFeaturedMedia().get(0);  // if you use above newsThumbnail then you will get wrong data corresponding item click therefore I get data against position on item click again
+
+                Bundle bundle = new Bundle();
+                bundle.putString("newsUrl",newsUrl);
+                bundle.putString("newsThumbnail",newsThumbnail);
+                postWebpageFragment.setArguments(bundle);
+
 
                 String checkFragmentStatus = mainActivity.checkFragStatus;
                 switch (checkFragmentStatus)
