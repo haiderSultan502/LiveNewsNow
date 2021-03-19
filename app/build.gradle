@@ -74,5 +74,10 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
 
+    //librart help to remove content in webview that you want remove like header and footer
+
+    implementation 'org.jsoup:jsoup:1.10.3'
+
+
 
 }

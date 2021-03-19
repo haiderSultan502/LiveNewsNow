@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,8 @@ import com.squareup.picasso.Picasso;
 import com.webscare.livenewsnow.MainActivity;
 import com.webscare.livenewsnow.R;
 
-import org.w3c.dom.Document;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
@@ -32,9 +34,10 @@ public class PostWebpageFragment extends Fragment {
     WebView webView;
     ImageView imageNewsHome,imvBookMark,imvShare;
 
+    Document document = null;
+
     Bundle bundle;
     static String newsUrl,newsThumbnail;
-    Document document = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +69,8 @@ public class PostWebpageFragment extends Fragment {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
+        MainActivity.animationShow();
+
         getBundleValues();
     }
 
@@ -78,9 +83,11 @@ public class PostWebpageFragment extends Fragment {
 
         Picasso.with(getActivity()).load(newsThumbnail).placeholder(R.drawable.loading).error(R.drawable.loading).into(imageNewsHome);
 
-        webView.loadUrl(newsUrl);
+//        webView.loadUrl(newsUrl);
 
-        webView.setWebViewClient(new MyWebViewClient());  //  this is neccessary otherwise web page open in browser instead of webview
+        new MyAsynTask().execute();
+
+
 
 //        MainActivity.animationHide();
 
@@ -89,18 +96,71 @@ public class PostWebpageFragment extends Fragment {
 
     }
 
-    private class MyWebViewClient extends WebViewClient {
+    private class MyAsynTask extends AsyncTask<Void,Void, Document>
+    {
+
+
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if ("www.livenewsnow.com".equals(Uri.parse(url).getHost())) {
-                // This is my website, so do not override; let my WebView load the page
-                return false;
-            }
-            // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(intent);
-            return true;
+        protected Document doInBackground(Void... voids) {
+            removeViews();
+            return document;
         }
+
+        private void removeViews() {
+
+            try {
+                document = Jsoup.connect(newsUrl).get();
+
+                document.getElementsByClass("td-header-menu-wrap").remove();
+                document.getElementsByClass("td-footer-container").remove();
+                document.getElementsByClass("td-sub-footer-container").remove();
+//                document.getElementsByClass("td-sub-footer-container td-container td-container-border").remove();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(final Document document) {
+            super.onPostExecute(document);
+
+            webView.loadDataWithBaseURL(newsUrl,document.toString(),"text/html","utf-8","");
+            webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+
+
+//            webView.setWebViewClient(new WebViewClient()
+//            {
+//                @Override
+//                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                    return super.shouldOverrideUrlLoading(view, url);
+//                }
+//            });
+            webView.setWebViewClient(new MyWebViewClient());
+
+            MainActivity.animationHide();
+
+
+
+
+        }
+
+        private class MyWebViewClient extends WebViewClient {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if ("www.livenewsnow.com".equals(Uri.parse(url).getHost())) {
+                    // This is my website, so do not override; let my WebView load the page
+
+                    return false;
+                }
+                // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+                return true;
+            }
+        }
+//
+
     }
 
 

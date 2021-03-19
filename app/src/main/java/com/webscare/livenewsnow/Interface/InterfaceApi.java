@@ -18,4 +18,7 @@ public interface InterfaceApi {
 
     @GET("search")
     Call<List<NewsModel>> getSearchNews(@Query("s") String searchKeyword);
+
+    @GET("nchannels")
+    Call<List> getLiveChannels();  //add model class
 }
