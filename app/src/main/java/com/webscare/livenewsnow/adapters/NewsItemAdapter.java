@@ -98,6 +98,9 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
                     case "businessFragment":
                         postWebPageFragment(R.id.frame_layout4);
                         break;
+                    case "searchFragment":
+                        postWebPageFragment(R.id.frame_layout_at_viewpager);
+                        break;
 
                 }
             }

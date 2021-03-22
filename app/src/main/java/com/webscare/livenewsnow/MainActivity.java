@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -99,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 seachStatus = true;
 
+                checkFragStatus = "searchFragment";
+
+
+
                 return false;
             }
 
@@ -110,8 +115,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return false;
             }
         });
-
-
 
     }
 
@@ -239,9 +242,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.tv_video_player:
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_layout_parent, videoPlayerFragment).addToBackStack(null)
-                        .commit();
+//                getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.frame_layout_parent, videoPlayerFragment).addToBackStack(null)
+//                        .commit();
+
+                Intent intent = new Intent(this, LiveNewsChannels.class);
+                startActivity(intent);
+                drawerLayout.closeDrawers();
                 break;
         }
 

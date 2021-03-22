@@ -107,7 +107,16 @@ public class SearchFragment extends Fragment {
                     }
                     arrayListSearchNews = (ArrayList<NewsModel>) response.body();
 
-                    showDataInViews();
+                    if (arrayListSearchNews.size() == 0 )
+                    {
+                        Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        showDataInViews();
+                    }
+
+
 
                     MainActivity.animationHide();
 
@@ -121,7 +130,7 @@ public class SearchFragment extends Fragment {
         }
         catch (Exception e)
         {
-
+            Toast.makeText(getActivity(), "no data found", Toast.LENGTH_SHORT).show();
         }
 
     }

@@ -1,62 +1,44 @@
-package com.webscare.livenewsnow.fragments;
+package com.webscare.livenewsnow;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.potyvideo.library.AndExoPlayerView;
 import com.potyvideo.library.globalEnums.EnumResizeMode;
 import com.webscare.livenewsnow.Interface.InterfaceApi;
 import com.webscare.livenewsnow.ModelsClasses.LiveChannelsModel;
-import com.webscare.livenewsnow.R;
-import com.webscare.livenewsnow.RetrofitLibrary;
-import com.webscare.livenewsnow.adapters.NewsItemAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VideoPlayerFragment extends Fragment implements View.OnClickListener{
+public class LiveNewsChannels extends AppCompatActivity implements View.OnClickListener {
 
-    View view;
     RecyclerView rvNewsHorizontally,rvNewsVertically;
     LinearLayoutManager linearLayoutManager;
     LinearLayout btnBack,btnShare;
 
-    AndExoPlayerView andExoPlayerView;
+    AndExoPlayerView andExoPlayerView;  //  Remember : if you want that you screen rotate horizontally perfectly then must include config chnges in manifest ,
     InterfaceApi interfaceApi;
     Call<LiveChannelsModel> callForLiveChannels;
     LiveChannelsModel liveChannelsModel = new LiveChannelsModel();
 
     TextView tvChannelText;
     String channelTitle,streamingLink;
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        view = inflater.inflate(R.layout.fragment_video_player, container, false);
+        setContentView(R.layout.activity_live_news_channels);
 
         initializeView();
         showDataInView();
-
-        return view;
     }
 
     private void showDataInView() {
@@ -110,32 +92,32 @@ public class VideoPlayerFragment extends Fragment implements View.OnClickListene
 
     private void initializeView() {
 
-//        rvNewsHorizontally=view.findViewById(R.id.rv_news_horizontally);
-//        rvNewsVertically=view.findViewById(R.id.rv_news_vertically);
-        btnBack = view.findViewById(R.id.btn_back);
-        btnShare = view.findViewById(R.id.btn_share);
-        tvChannelText = view.findViewById(R.id.title_txt);
+        rvNewsHorizontally=findViewById(R.id.rv_news_horizontally);
+        rvNewsVertically=findViewById(R.id.rv_news_vertically);
+        btnBack = findViewById(R.id.btn_back);
+        btnShare = findViewById(R.id.btn_share);
+        tvChannelText = findViewById(R.id.title_txt);
 
-        andExoPlayerView = view.findViewById(R.id.andExoPlayerView);
+        andExoPlayerView = findViewById(R.id.andExoPlayerView);
         andExoPlayerView.setResizeMode(EnumResizeMode.FILL);
         andExoPlayerView.setShowController(true);
 
 
-//        setOrientationNewsHorizontallRv();
-//        setOrientationNewsVerticallyRv();
+        setOrientationNewsHorizontallRv();
+        setOrientationNewsVerticallyRv();
 
         btnBack.setOnClickListener(this);
 
     }
 
     private void setOrientationNewsVerticallyRv() {
-        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvNewsVertically.setLayoutManager(linearLayoutManager);
     }
 
     private void setOrientationNewsHorizontallRv() {
-        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvNewsHorizontally.setLayoutManager(linearLayoutManager);
     }
