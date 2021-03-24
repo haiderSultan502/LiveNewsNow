@@ -17,9 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.webscare.livenewsnow.Interface.InterfaceApi;
 import com.webscare.livenewsnow.MainActivity;
 import com.webscare.livenewsnow.ModelsClasses.NewsModel;
+import com.webscare.livenewsnow.ModelsClasses.SearchNewsModel;
 import com.webscare.livenewsnow.R;
 import com.webscare.livenewsnow.RetrofitLibrary;
 import com.webscare.livenewsnow.adapters.NewsItemAdapter;
+import com.webscare.livenewsnow.adapters.SearchItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +40,8 @@ public class SearchFragment extends Fragment {
     String searchKeyword;
     Context context;
     InterfaceApi interfaceApi;
-    Call<List<NewsModel>> callForSearchNews;
-    ArrayList<NewsModel> arrayListSearchNews;
+    Call<List<SearchNewsModel>> callForSearchNews;
+    ArrayList<SearchNewsModel> arrayListSearchNews;
     String url = "https://www.livenewsnow.com/wp-json/wp/v2/";
 
 
@@ -83,12 +85,13 @@ public class SearchFragment extends Fragment {
         setOrientationSearchRv();
 
         getSearchNews(searchKeyword);
+
     }
 
     private void showDataInViews() {
 
-        NewsItemAdapter newsItemAdapterVr = new NewsItemAdapter(getActivity(),"rvVertically",arrayListSearchNews);
-        recyclerViewSearchtNews.setAdapter(newsItemAdapterVr);
+        SearchItemAdapter searchItemAdapter = new SearchItemAdapter(getActivity(),"rvVertically",arrayListSearchNews);
+        recyclerViewSearchtNews.setAdapter(searchItemAdapter);
 
     }
 
@@ -98,14 +101,14 @@ public class SearchFragment extends Fragment {
             interfaceApi = RetrofitLibrary.connect(url);
             callForSearchNews = interfaceApi.getSearchNews(searchKeyword);
 
-            callForSearchNews.enqueue(new Callback<List<NewsModel>>() {
+            callForSearchNews.enqueue(new Callback<List<SearchNewsModel>>() {
                 @Override
-                public void onResponse(Call<List<NewsModel>> call, Response<List<NewsModel>> response) {
+                public void onResponse(Call<List<SearchNewsModel>> call, Response<List<SearchNewsModel>> response) {
                     if (!response.isSuccessful())
                     {
                         Toast.makeText(getActivity(), "Please try later", Toast.LENGTH_SHORT).show();
                     }
-                    arrayListSearchNews = (ArrayList<NewsModel>) response.body();
+                    arrayListSearchNews = (ArrayList<SearchNewsModel>) response.body();
 
                     if (arrayListSearchNews.size() == 0 )
                     {
@@ -123,7 +126,7 @@ public class SearchFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<List<NewsModel>> call, Throwable t) {
+                public void onFailure(Call<List<SearchNewsModel>> call, Throwable t) {
 
                 }
             });

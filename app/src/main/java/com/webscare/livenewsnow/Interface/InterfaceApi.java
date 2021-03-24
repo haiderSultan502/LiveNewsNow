@@ -2,6 +2,7 @@ package com.webscare.livenewsnow.Interface;
 
 import com.webscare.livenewsnow.ModelsClasses.LiveChannelsModel;
 import com.webscare.livenewsnow.ModelsClasses.NewsModel;
+import com.webscare.livenewsnow.ModelsClasses.SearchNewsModel;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface InterfaceApi {
     Call<List<NewsModel>> getAllCategoriesNews(@Query("cat") String categoryIdAndPageNumber);
 
     @GET("search")
-    Call<List<NewsModel>> getSearchNews(@Query("s") String searchKeyword);
+    Call<List<SearchNewsModel>> getSearchNews(@Query("s") String searchKeyword);
 
     @GET("nchannels")
     Call<LiveChannelsModel> getLiveChannels();
