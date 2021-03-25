@@ -35,6 +35,7 @@ public class SearchFragment extends Fragment {
     RecyclerView recyclerViewSearchtNews;
     LinearLayoutManager linearLayoutManager;
     View view;
+
 //    Button click;
 
     String searchKeyword;
@@ -72,6 +73,8 @@ public class SearchFragment extends Fragment {
 
         recyclerViewSearchtNews=view.findViewById(R.id.rv_search_news);
         arrayListSearchNews = new ArrayList<>();
+
+
 //        click = view.findViewById(R.id.click);
 //        click.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -81,6 +84,7 @@ public class SearchFragment extends Fragment {
 //            }
 //            }
 //        });
+
 
         setOrientationSearchRv();
 
@@ -104,20 +108,18 @@ public class SearchFragment extends Fragment {
             callForSearchNews.enqueue(new Callback<List<SearchNewsModel>>() {
                 @Override
                 public void onResponse(Call<List<SearchNewsModel>> call, Response<List<SearchNewsModel>> response) {
+
+                   // this  !response.isSuccessful() is called in one of the case when no result come correspondking respponse like 0 result come in arraylist
+
                     if (!response.isSuccessful())
                     {
                         Toast.makeText(getActivity(), "Please try later", Toast.LENGTH_SHORT).show();
+                        return;  // if not write  return  then app crash when no result come in arraylist.
                     }
+
                     arrayListSearchNews = (ArrayList<SearchNewsModel>) response.body();
 
-                    if (arrayListSearchNews.size() == 0 )
-                    {
-                        Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        showDataInViews();
-                    }
+                    showDataInViews();
 
 
 

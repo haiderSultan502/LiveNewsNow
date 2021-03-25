@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.potyvideo.library.AndExoPlayerView;
 import com.potyvideo.library.globalEnums.EnumResizeMode;
@@ -18,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LiveNewsChannels extends AppCompatActivity implements View.OnClickListener {
+public class LiveNewsChannels extends AppCompatActivity  implements View.OnClickListener  {
 
     RecyclerView rvNewsHorizontally,rvNewsVertically;
     LinearLayoutManager linearLayoutManager;
@@ -127,9 +128,9 @@ public class LiveNewsChannels extends AppCompatActivity implements View.OnClickL
         switch (v.getId())
         {
             case R.id.btn_back:
-                if (getFragmentManager().getBackStackEntryCount() != 0) {
-                    getFragmentManager().popBackStack();
-                }
+
+                finish();
+
                 break;
         }
     }

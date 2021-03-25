@@ -1,33 +1,25 @@
 package com.webscare.livenewsnow;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.google.android.material.tabs.TabLayout;
+
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.webscare.livenewsnow.fragments.AmericanFragment;
 import com.webscare.livenewsnow.fragments.BusinessFragment;
@@ -35,7 +27,6 @@ import com.webscare.livenewsnow.fragments.HomeFragment;
 import com.webscare.livenewsnow.adapters.ViewPagerAdapter;
 import com.webscare.livenewsnow.fragments.SearchFragment;
 import com.webscare.livenewsnow.fragments.UpdatesFragment;
-import com.webscare.livenewsnow.fragments.VideoPlayerFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,9 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static int fragmentsCount;
     public static LinearLayout lootieAnimaationLayout;
     String searchPostKeyword;
-
-
-    VideoPlayerFragment videoPlayerFragment = new VideoPlayerFragment();
 
 
     @Override
