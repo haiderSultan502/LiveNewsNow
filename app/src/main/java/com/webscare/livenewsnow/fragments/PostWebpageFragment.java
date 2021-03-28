@@ -4,16 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,10 +32,10 @@ public class PostWebpageFragment extends Fragment {
     WebView webView;
     ImageView imageNewsHome,imvBookMark,imvShare;
 
-    Document document = null;
+    static Document document = null;
 
     Bundle bundle;
-    static String newsUrl,newsThumbnail;
+    String newsUrl,newsThumbnail;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,7 +68,7 @@ public class PostWebpageFragment extends Fragment {
         webSettings.setJavaScriptEnabled(true);
 
         MainActivity.animationShow();
-
+//
         getBundleValues();
     }
 
@@ -109,11 +107,13 @@ public class PostWebpageFragment extends Fragment {
         private void removeViews() {
 
             try {
+
                 document = Jsoup.connect(newsUrl).get();
 
                 document.getElementsByClass("td-header-menu-wrap").remove();
                 document.getElementsByClass("td-footer-container").remove();
                 document.getElementsByClass("td-sub-footer-container").remove();
+                document.getElementsByClass("td-modal-image").remove();
 //                document.getElementsByClass("td-sub-footer-container td-container td-container-border").remove();
 
             } catch (IOException e) {
@@ -140,27 +140,31 @@ public class PostWebpageFragment extends Fragment {
 
             MainActivity.animationHide();
 
-
-
-
         }
 
-        private class MyWebViewClient extends WebViewClient {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if ("www.livenewsnow.com".equals(Uri.parse(url).getHost())) {
-                    // This is my website, so do not override; let my WebView load the page
 
-                    return false;
-                }
-                // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-                return true;
-            }
-        }
 //
 
+    }
+
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//            if ("www.livenewsnow.com".equals(Uri.parse(url).getHost())) {
+                // This is my website, so do not override; let my WebView load the page
+
+//                Log.d("newsUrl",  url);
+//                newsUrl = url;
+//                new MyAsynTask().execute();
+
+//                return false;
+//            }
+
+            // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+            return true;
+        }
     }
 
 

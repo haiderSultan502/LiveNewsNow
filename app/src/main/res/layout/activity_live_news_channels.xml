@@ -153,41 +153,56 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/app_bg_color"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp">
 
-            <LinearLayout
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="left">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Related Channels"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/post_title_text_color"
+                android:textStyle="normal"
+                android:layout_marginTop="@dimen/_5sdp">
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:scrollbars="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_20sdp">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_news_horizontally"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingLeft="@dimen/_10sdp">
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_news_vertically"
+                        android:id="@+id/recycler_view_realted_live_channels"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
-
                 </LinearLayout>
 
-            </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

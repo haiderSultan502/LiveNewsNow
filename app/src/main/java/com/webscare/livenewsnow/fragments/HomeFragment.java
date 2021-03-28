@@ -51,6 +51,8 @@ public class HomeFragment extends Fragment {
     Boolean isScrooling = false;
     int currentItem,totalItems,scrollOutItems;
 
+    String newsThumbnail,newsUrl;
+
     ProgressBar progressBar;
 
     Call<List<NewsModel>> callForNews;
@@ -149,9 +151,17 @@ public class HomeFragment extends Fragment {
 
                 thumbnailTopStoryStr = arrayListTopStories.get(0).getFeaturedMedia().get(0);
                 thumbnailTopStoryTitleStr = arrayListTopStories.get(0).getTitle();
+                newsUrl = arrayListTopStories.get(0).getGuid();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("newsUrl",newsUrl);
+                bundle.putString("newsThumbnail",thumbnailTopStoryStr);
+                postWebpageFragment.setArguments(bundle);
+
 
                 Picasso.with(getActivity()).load(thumbnailTopStoryStr).placeholder(R.drawable.loading).error(R.drawable.loading).into(thumbnailTopStoryImv);
                 thumbnailTopStoryTitleTv.setText(thumbnailTopStoryTitleStr);
+
 
                 for (int i = 1 ; i <= 5 ; i++)
                 {
@@ -209,10 +219,6 @@ public class HomeFragment extends Fragment {
 
                     loadMore();
                 }
-
-
-
-
 
             }
 

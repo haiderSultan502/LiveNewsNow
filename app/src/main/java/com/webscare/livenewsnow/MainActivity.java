@@ -21,10 +21,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.webscare.livenewsnow.ModelsClasses.LiveChannelsModel;
 import com.webscare.livenewsnow.fragments.AmericanFragment;
 import com.webscare.livenewsnow.fragments.BusinessFragment;
 import com.webscare.livenewsnow.fragments.HomeFragment;
 import com.webscare.livenewsnow.adapters.ViewPagerAdapter;
+import com.webscare.livenewsnow.fragments.LiveFragment;
 import com.webscare.livenewsnow.fragments.SearchFragment;
 import com.webscare.livenewsnow.fragments.UpdatesFragment;
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static int fragmentsCount;
     public static LinearLayout lootieAnimaationLayout;
     String searchPostKeyword;
+    public static LiveChannelsModel liveChannelsModel = new LiveChannelsModel();
 
 
     @Override
@@ -60,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switchDt = findViewById(R.id.switch_dt);
         searchView = findViewById(R.id.search_view);
         btnFilter = findViewById(R.id.btn_filter_parent);
-        tvVideoPlayer = findViewById(R.id.tv_video_player);
         tabLayout = findViewById(R.id.tabs);
         viewPager = findViewById(R.id.view_pager);
         viewPager.setOffscreenPageLimit(9);  // system keep 9 page instances on both sides of the current page in memory  // its save the page in memory so when move back then page not reload otherwise page load again, and the param value in function represent how much pages save in memory
@@ -75,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDrawer.setOnClickListener(this);
         switchDt.setOnClickListener(this);
         btnFilter.setOnClickListener(this);
-        tvVideoPlayer.setOnClickListener(this);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -176,9 +177,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void addTabs(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
         adapter.addFrag(new HomeFragment(), "HOME");
-        adapter.addFrag(new AmericanFragment(), "AMERICAN");
-        adapter.addFrag(new UpdatesFragment(), "UPDATES");
+        adapter.addFrag(new AmericanFragment(), "HEALTH");
         adapter.addFrag(new BusinessFragment(), "BUSINESS");
+        adapter.addFrag(new LiveFragment(MainActivity.this), "LIVE");
 //        adapter.addFrag(new AmericanFragment(), "DAILY");
 //        adapter.addFrag(new AmericanFragment(), "MAGAZINE");
 //        adapter.addFrag(new AmericanFragment(), "SPORTS");
@@ -228,15 +229,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     switchDt.setChecked(false);
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
-                break;
-            case R.id.tv_video_player:
-//                getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.frame_layout_parent, videoPlayerFragment).addToBackStack(null)
-//                        .commit();
-
-                Intent intent = new Intent(this, LiveNewsChannels.class);
-                startActivity(intent);
-                drawerLayout.closeDrawers();
                 break;
         }
 
