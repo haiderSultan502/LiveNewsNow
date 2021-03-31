@@ -1,10 +1,12 @@
 package com.webscare.livenewsnow.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,6 +56,18 @@ public class PostWebpageFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        // Get the web view hit test result
+        final WebView.HitTestResult result = webView.getHitTestResult();
+
+        String imgUrl = result.getExtra();
+
+        Toast.makeText(getActivity(), imgUrl, Toast.LENGTH_SHORT).show();
+    }
+
     private void initializeView() {
 
         webView=view.findViewById(R.id.web_view);
@@ -77,6 +92,7 @@ public class PostWebpageFragment extends Fragment {
         bundle=getArguments();
 
         newsUrl=bundle.getString("newsUrl");
+
         newsThumbnail=bundle.getString("newsThumbnail");
 
         Picasso.with(getActivity()).load(newsThumbnail).placeholder(R.drawable.loading).error(R.drawable.loading).into(imageNewsHome);
@@ -84,8 +100,6 @@ public class PostWebpageFragment extends Fragment {
 //        webView.loadUrl(newsUrl);
 
         new MyAsynTask().execute();
-
-
 
 //        MainActivity.animationHide();
 
@@ -114,6 +128,7 @@ public class PostWebpageFragment extends Fragment {
                 document.getElementsByClass("td-footer-container").remove();
                 document.getElementsByClass("td-sub-footer-container").remove();
                 document.getElementsByClass("td-modal-image").remove();
+
 //                document.getElementsByClass("td-sub-footer-container td-container td-container-border").remove();
 
             } catch (IOException e) {
@@ -121,11 +136,16 @@ public class PostWebpageFragment extends Fragment {
             }
         }
 
+
+
         @Override
         protected void onPostExecute(final Document document) {
             super.onPostExecute(document);
 
+            webView.setWebViewClient(new MyWebViewClient());
+
             webView.loadDataWithBaseURL(newsUrl,document.toString(),"text/html","utf-8","");
+
             webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
 
 
@@ -136,7 +156,7 @@ public class PostWebpageFragment extends Fragment {
 //                    return super.shouldOverrideUrlLoading(view, url);
 //                }
 //            });
-            webView.setWebViewClient(new MyWebViewClient());
+
 
             MainActivity.animationHide();
 
@@ -160,10 +180,30 @@ public class PostWebpageFragment extends Fragment {
 //                return false;
 //            }
 
+
             // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
             return true;
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+
+            Toast.makeText(getActivity(), "page started", Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+
+            Toast.makeText(getActivity(), "page ended", Toast.LENGTH_SHORT).show();
+
+            webView.loadUrl("javascript:var s = document.getElementById('smile').src;document.write(s);");
+
+            Log.d("loading comlete", "onPageFinished: ");
         }
     }
 
