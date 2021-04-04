@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.webscare.livenewsnow.ModelsClasses.LiveChannelsModel;
+import com.webscare.livenewsnow.OtherClasses.AlertDialogClass;
 import com.webscare.livenewsnow.fragments.AmericanFragment;
 import com.webscare.livenewsnow.fragments.BusinessFragment;
 import com.webscare.livenewsnow.fragments.HomeFragment;
@@ -48,12 +50,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String searchPostKeyword;
     public static LiveChannelsModel liveChannelsModel = new LiveChannelsModel();
 
+    public static AlertDialogClass alertDialogClass = new AlertDialogClass();
+
+    private static Context context;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = this;
+
         initializeView();
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     private void initializeView() {

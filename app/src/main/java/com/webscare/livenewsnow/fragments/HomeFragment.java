@@ -144,7 +144,8 @@ public class HomeFragment extends Fragment {
 
                 if (!response.isSuccessful())
                 {
-                    Toast.makeText(getActivity(), "Please try later", Toast.LENGTH_SHORT).show();
+                    MainActivity.alertDialogClass.alertDialog();
+                    MainActivity.animationHide();
                 }
 
                 arrayListTopStories = (ArrayList<NewsModel>) response.body();
@@ -181,6 +182,9 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<NewsModel>> call, Throwable t) {
+
+                MainActivity.alertDialogClass.alertDialog();
+                MainActivity.animationHide();
 
             }
         });
