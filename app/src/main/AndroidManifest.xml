@@ -12,8 +12,9 @@
         android:supportsRtl="true"
 
         android:usesCleartextTraffic="true"
-
         android:hardwareAccelerated="true"
+        android:windowSoftInputMode="adjustResize"
+        android:requestLegacyExternalStorage="true"
 
         android:theme="@style/Theme.LiveNewsNow">
         <activity android:name=".LiveNewsChannels"

@@ -10,11 +10,11 @@ import com.webscare.livenewsnow.MainActivity;
 
 public class AlertDialogClass {
 
-    public  void alertDialog() {
+    public  void alertDialog(String message) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.getContext());
         alertDialogBuilder
-                .setMessage("Please try later")
+                .setMessage(message)
                 .setCancelable(true);
 
 

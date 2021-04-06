@@ -43,7 +43,8 @@ public class PostWebpageFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+    }  // add comment
+
 
     @Nullable
     @Override
@@ -140,6 +141,7 @@ public class PostWebpageFragment extends Fragment {
 
         @Override
         protected void onPostExecute(final Document document) {
+
             super.onPostExecute(document);
 
             webView.setWebViewClient(new MyWebViewClient());
@@ -148,7 +150,6 @@ public class PostWebpageFragment extends Fragment {
 
             webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
 
-
 //            webView.setWebViewClient(new WebViewClient()
 //            {
 //                @Override
@@ -156,7 +157,6 @@ public class PostWebpageFragment extends Fragment {
 //                    return super.shouldOverrideUrlLoading(view, url);
 //                }
 //            });
-
 
             MainActivity.animationHide();
 
@@ -170,28 +170,30 @@ public class PostWebpageFragment extends Fragment {
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//            if ("www.livenewsnow.com".equals(Uri.parse(url).getHost())) {
-                // This is my website, so do not override; let my WebView load the page
+            if ("www.livenewsnow.com".equals(Uri.parse(url).getHost())) {
+//                 This is my website, so do not override; let my WebView load the page
 
-//                Log.d("newsUrl",  url);
-//                newsUrl = url;
-//                new MyAsynTask().execute();
+                Log.d("newsUrl",  url);
+                newsUrl = url;
+                new MyAsynTask().execute();
 
-//                return false;
-//            }
+                return true;
+            }
 
 
             // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
+
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
             return true;
+
         }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
 
-            Toast.makeText(getActivity(), "page started", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "page started", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -199,11 +201,7 @@ public class PostWebpageFragment extends Fragment {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
 
-            Toast.makeText(getActivity(), "page ended", Toast.LENGTH_SHORT).show();
-
-            webView.loadUrl("javascript:var s = document.getElementById('smile').src;document.write(s);");
-
-            Log.d("loading comlete", "onPageFinished: ");
+//            Toast.makeText(getActivity(), "page ended", Toast.LENGTH_SHORT).show();
         }
     }
 

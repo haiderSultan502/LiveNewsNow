@@ -73,6 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         app:stl_indicatorInterpolation="smart"
+        app:stl_distributeEvenly="true"
         app:stl_indicatorThickness="30dp"
         app:stl_indicatorColor="@color/tab_indicator_color"
         app:stl_underlineColor="@color/transparent_color"

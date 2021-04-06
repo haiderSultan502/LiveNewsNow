@@ -113,7 +113,7 @@ public class SearchFragment extends Fragment {
 
                     if (!response.isSuccessful())
                     {
-                        MainActivity.alertDialogClass.alertDialog();
+                        MainActivity.alertDialogClass.alertDialog("Result not found");
                         MainActivity.animationHide();
                         return;  // if not write  return  then app crash when no result come in arraylist.
                     }
@@ -130,14 +130,14 @@ public class SearchFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<SearchNewsModel>> call, Throwable t) {
-                    MainActivity.alertDialogClass.alertDialog();
+                    MainActivity.alertDialogClass.alertDialog("Please try later");
                     MainActivity.animationHide();
                 }
             });
         }
         catch (Exception e)
         {
-            MainActivity.alertDialogClass.alertDialog();
+            MainActivity.alertDialogClass.alertDialog(e.getMessage());
             MainActivity.animationHide();
         }
 

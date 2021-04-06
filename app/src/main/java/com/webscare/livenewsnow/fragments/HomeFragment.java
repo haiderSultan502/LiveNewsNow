@@ -136,58 +136,66 @@ public class HomeFragment extends Fragment {
 
     private void getTopStories(String url) {
 
-        interfaceApi = RetrofitLibrary.connect(url);
-        callForNews = interfaceApi.getTopStories();
-        callForNews.enqueue(new Callback<List<NewsModel>>() {
-            @Override
-            public void onResponse(Call<List<NewsModel>> call, Response<List<NewsModel>> response) {
+        try {
+            interfaceApi = RetrofitLibrary.connect(url);
+            callForNews = interfaceApi.getTopStories();
+            callForNews.enqueue(new Callback<List<NewsModel>>() {
+                @Override
+                public void onResponse(Call<List<NewsModel>> call, Response<List<NewsModel>> response) {
 
-                if (!response.isSuccessful())
-                {
-                    MainActivity.alertDialogClass.alertDialog();
-                    MainActivity.animationHide();
-                }
+                    if (!response.isSuccessful())
+                    {
+                        MainActivity.alertDialogClass.alertDialog("Please try later");
+                        MainActivity.animationHide();
+                    }
 
-                arrayListTopStories = (ArrayList<NewsModel>) response.body();
+                    arrayListTopStories = (ArrayList<NewsModel>) response.body();
 
-                thumbnailTopStoryStr = arrayListTopStories.get(0).getFeaturedMedia().get(0);
-                thumbnailTopStoryTitleStr = arrayListTopStories.get(0).getTitle();
-                newsUrl = arrayListTopStories.get(0).getGuid();
+                    thumbnailTopStoryStr = arrayListTopStories.get(0).getFeaturedMedia().get(0);
+                    thumbnailTopStoryTitleStr = arrayListTopStories.get(0).getTitle();
+                    newsUrl = arrayListTopStories.get(0).getGuid();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("newsUrl",newsUrl);
-                bundle.putString("newsThumbnail",thumbnailTopStoryStr);
-                postWebpageFragment.setArguments(bundle);
-
-
-                Picasso.with(getActivity()).load(thumbnailTopStoryStr).placeholder(R.drawable.loading).error(R.drawable.loading).into(thumbnailTopStoryImv);
-                thumbnailTopStoryTitleTv.setText(thumbnailTopStoryTitleStr);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("newsUrl",newsUrl);
+                    bundle.putString("newsThumbnail",thumbnailTopStoryStr);
+                    postWebpageFragment.setArguments(bundle);
 
 
-                for (int i = 1 ; i <= 5 ; i++)
-                {
-                    arrayListTopStoriesHr.add(arrayListTopStories.get(i));
-                }
+                    Picasso.with(getActivity()).load(thumbnailTopStoryStr).placeholder(R.drawable.loading).error(R.drawable.loading).into(thumbnailTopStoryImv);
+                    thumbnailTopStoryTitleTv.setText(thumbnailTopStoryTitleStr);
 
-                for (int i = 6 ; i <= 10 ; i++)
-                {
-                    arrayListTopStoriesVr.add(arrayListTopStories.get(i));
-                }
+
+                    for (int i = 1 ; i <= 5 ; i++)
+                    {
+                        arrayListTopStoriesHr.add(arrayListTopStories.get(i));
+                    }
+
+                    for (int i = 6 ; i <= 10 ; i++)
+                    {
+                        arrayListTopStoriesVr.add(arrayListTopStories.get(i));
+                    }
 
 //                getFeaturedNews(pageNumber);
 
-                showDataInView();
+                    showDataInView();
 
-            }
+                }
 
-            @Override
-            public void onFailure(Call<List<NewsModel>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<NewsModel>> call, Throwable t) {
 
-                MainActivity.alertDialogClass.alertDialog();
-                MainActivity.animationHide();
+                    MainActivity.alertDialogClass.alertDialog("Please try later");
+                    MainActivity.animationHide();
 
-            }
-        });
+                }
+            });
+        }
+        catch (Exception e) {
+
+            MainActivity.alertDialogClass.alertDialog("Please try later");
+        }
+
+
 
     }
 
