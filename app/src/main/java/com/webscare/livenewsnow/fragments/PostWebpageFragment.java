@@ -35,7 +35,7 @@ public class PostWebpageFragment extends Fragment {
     WebView webView;
     ImageView imageNewsHome,imvBookMark,imvShare;
 
-    static Document document = null;
+    static Document document = null; // comment
 
     Bundle bundle;
     String newsUrl,newsThumbnail;
