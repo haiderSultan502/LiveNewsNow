@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SearchView searchView;
     RelativeLayout btnFilter;
     Boolean checkSearchViewStatus = false, seachStatus = false;
-    TextView tvVideoPlayer;
     Animation animation;
     public static String checkFragStatus;
     public static int fragmentsCount;

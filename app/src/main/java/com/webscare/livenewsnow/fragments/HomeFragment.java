@@ -2,6 +2,7 @@ package com.webscare.livenewsnow.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,8 +84,6 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-
-
     private void showDataInView() {
 
         NewsItemAdapter newsItemAdapterHr = new NewsItemAdapter(getActivity(),"rvHorizontally",arrayListTopStoriesHr);
@@ -134,10 +133,10 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void getTopStories(String url) {
+    private void getTopStories(String urlNews) {
 
         try {
-            interfaceApi = RetrofitLibrary.connect(url);
+            interfaceApi = RetrofitLibrary.connect(urlNews);
             callForNews = interfaceApi.getTopStories();
             callForNews.enqueue(new Callback<List<NewsModel>>() {
                 @Override
@@ -184,7 +183,8 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onFailure(Call<List<NewsModel>> call, Throwable t) {
 
-                    MainActivity.alertDialogClass.alertDialog("Please try later");
+                    MainActivity.alertDialogClass.alertDialog("Please try later" + t.getMessage());
+                    Log.d("failure", "onFailure: " + t.getMessage());
                     MainActivity.animationHide();
 
                 }

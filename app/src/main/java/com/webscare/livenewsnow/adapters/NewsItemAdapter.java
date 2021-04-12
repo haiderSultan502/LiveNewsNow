@@ -75,7 +75,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ItemVi
             public void onClick(View v) {
 
                 newsUrl = arrayListHomeNews.get(position).getGuid();
-                newsThumbnail = arrayListHomeNews.get(position).getFeaturedMedia().get(0);  // if you use above newsThumbnail then you will get wrong data corresponding item click therefore I get data against position on item click again
+                newsThumbnail = arrayListHomeNews.get(position).getThumbnailUrl().get(0);  // if you use above newsThumbnail then you will get wrong data corresponding item click therefore I get data against position on item click again
 
                 Bundle bundle = new Bundle();
                 bundle.putString("newsUrl",newsUrl);
